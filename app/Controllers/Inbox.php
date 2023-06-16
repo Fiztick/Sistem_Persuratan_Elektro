@@ -23,21 +23,20 @@ class Inbox extends BaseController
 
     public function index()
     {
+        $keyword = $this->request->getVar('keyword');
+        if (!empty($keyword)){
+            return $this->search();
+        }
+
+        $this->data['perPage'] = $this->request->getVar('perPage') ?? 10;
+
         $query = "status_inbox < 3";
 
         $builder = $this->inbox_model->builder();
         $builder->join('users', 'users.id_user = inbox.id_user');
         $builder->join('tipe', 'tipe.id_tipe = inbox.tipe_inbox');
-        $builder->where('status_inbox <', 2);
+        $builder->where('status_inbox < 3');
         $datas = $builder->get()->getResult();
-        // var_dump($datas);
-
-        $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
-        $this->data['perPage'] =  10;
-        $this->data['total'] =  $this->inbox_model->where($query)->countAllResults();
-        $this->data['inbox'] = $this->inbox_model->where($query)->paginate($this->data['perPage']);
-        $this->data['total_res'] = is_array($this->data['inbox'])? count($this->data['inbox']) : 0;
-        $this->data['pager'] = $this->inbox_model->pager;
 
         // Create an associative array of user IDs and names
         $userNames = [];
@@ -46,6 +45,12 @@ class Inbox extends BaseController
             $userNames[$data->id_user] = $data->nama_user;
             $typeNames[$data->tipe_inbox] = $data->nama_tipe;
         }
+
+        $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
+        $this->data['total'] =  $this->inbox_model->where($query)->countAllResults();
+        $this->data['inbox'] = $this->inbox_model->where($query)->orderBy('tanggal_inbox', 'DESC')->paginate($this->data['perPage']);
+        $this->data['total_res'] = is_array($this->data['inbox'])? count($this->data['inbox']) : 0;
+        $this->data['pager'] = $this->inbox_model->pager;
 
         // Assign the user names to the $inbox array
         foreach ($this->data['inbox'] as &$inboxItem) {
@@ -75,6 +80,17 @@ class Inbox extends BaseController
     }
 
     public function destroy($id) {
+        $data = $this->inbox_model->find($id);
+        $tanggal_file = strtotime($data['tanggal_inbox']);
+        $tanggal_file = date('d-m-Y', $tanggal_file);
+        $file = WRITEPATH . 'uploads/' . $tanggal_file . '/' . $data['file_inbox'];
+        
+        //apus file di server
+        if(!empty($data['file_inbox'])){
+            unlink($file);
+        }
+
+        //apus di database
         $this->inbox_model->delete($id);
         return redirect()->to(site_url('inbox'))->with('success', 'Data Berhasil Dihapus');
     }
@@ -134,10 +150,73 @@ class Inbox extends BaseController
         $data = $this->inbox_model->find($id);
         $tanggal_file = strtotime($data['tanggal_inbox']);
         $tanggal_file = date('d-m-Y', $tanggal_file);
-        // echo $tanggal_file;
-        // var_dump($data);
         $file = WRITEPATH . 'uploads/' . $tanggal_file . '/' . $data['file_inbox'];
         return $this->response->download($file, null);
+    }
+
+    public function search()
+    {
+        $keyword = $this->request->getVar('keyword');
+
+        if (empty($keyword)){
+            return $this->index();
+        }
+
+        // ngambil nama user yang sesuai keyword
+        $builder = $this->inbox_model->builder();
+        $builder->join('users', 'users.id_user = inbox.id_user');
+        $builder->join('tipe', 'tipe.id_tipe = inbox.tipe_inbox');
+        $builder->where('status_inbox <', 2);
+        $user_object = $builder->Like('nama_user', $keyword)->get()->getResult(); // Add this line
+
+        foreach ($user_object as $user) {
+            $users[] = $user->id_user;
+        }
+
+        //ngambil smua data
+        $builder = $this->inbox_model->builder();
+        $builder->join('users', 'users.id_user = inbox.id_user');
+        $builder->join('tipe', 'tipe.id_tipe = inbox.tipe_inbox');
+        $builder->where('status_inbox < 3');
+        $datas = $builder->get()->getResult();
+
+        // Create an associative array of user IDs and names
+        $userNames = [];
+        $typeNames = [];
+        foreach ($datas as $data) {
+            $userNames[$data->id_user] = $data->nama_user;
+            $typeNames[$data->tipe_inbox] = $data->nama_tipe;
+        }
+
+        $query = "status_inbox < 3";
+
+        $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
+        $this->data['perPage'] =  10;
+        // $this->data['total'] =  $this->inbox_model->like('email_inbox', $keyword, 'BOTH')->orWhereIn('id_user', $users)->orWhere($query)->countAllResults();
+        $this->data['total'] = $this->inbox_model->groupStart()
+            ->like('email_inbox', $keyword)
+            ->orWhereIn('id_user', $users)
+            ->groupEnd()
+            ->where($query)
+            ->countAllResults();
+        // $this->data['inbox'] = $this->inbox_model->like('email_inbox', $keyword, 'BOTH')->orWhereIn('id_user', $users)->orWhere($query)->orderBy('tanggal_inbox', 'DESC')->paginate($this->data['perPage']);
+        $this->data['inbox'] = $this->inbox_model->groupStart()
+            ->like('email_inbox', $keyword, 'BOTH')
+            ->orWhereIn('id_user', $users)
+            ->where($query)
+            ->groupEnd()
+            ->orderBy('tanggal_inbox', 'DESC')
+            ->paginate($this->data['perPage']);
+        $this->data['total_res'] = is_array($this->data['inbox'])? count($this->data['inbox']) : 0;
+        $this->data['pager'] = $this->inbox_model->pager;
+
+        // Assign the user names to the $inbox array
+        foreach ($this->data['inbox'] as &$inboxItem) {
+            $inboxItem['nama_user'] = $userNames[$inboxItem['id_user']] ?? '';
+            $inboxItem['nama_tipe'] = $typeNames[$inboxItem['tipe_inbox']] ?? '';
+        }
+
+        return view('inbox/get', $this->data);
     }
 
     // status kebawah nnti pindahin ke controller sendiri biar lebih enak ama routingnya diubah

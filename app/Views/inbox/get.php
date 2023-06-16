@@ -47,6 +47,29 @@
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
+                        <div class="row">
+                            <div class="col">
+                                <div class="btn-group ml-2">
+                                    <a href="<?= site_url('inbox') ?>"
+                                        class="btn btn-secondary <?= $perPage == 10 ? 'active' : '' ?>">10</a>
+                                    <a href="<?= site_url('inbox?perPage=50') ?>"
+                                        class="btn btn-secondary <?= $perPage == 50 ? 'active' : '' ?>">50</a>
+                                    <a href="<?= site_url('inbox?perPage=100') ?>"
+                                        class="btn btn-secondary <?= $perPage == 100 ? 'active' : '' ?>">100</a>
+                                </div>
+                            </div>
+                            <div class="col-4 d-flex justify-content-end">
+                                <form action="<?= site_url('inbox/search') ?>" class="form-inline" method="get">
+                                    <div class="form-group mr-2">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Search..."
+                                            value="<?php empty($keyword) ? '' : $keyword; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
@@ -72,7 +95,8 @@
                                 <td><?=$value['nama_tipe']?></td>
                                 <td><?=$value['deskripsi_inbox']?></td>
                                 <?php if (!empty($value['file_inbox'])): ?>
-                                <td><a href="<?=site_url('download/'.$value['id_inbox'])?>"><i class="far fa-file fa-3x" style="color: #7a7a7a"></i></a></td>
+                                <td><a href="<?=site_url('download/'.$value['id_inbox'])?>"><i class="far fa-file fa-3x"
+                                            style="color: #7a7a7a"></i></a></td>
                                 <?php else: ?>
                                 <td>Tidak ada file yang diupload</td>
                                 <?php endif ?>
