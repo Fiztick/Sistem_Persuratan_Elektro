@@ -50,7 +50,8 @@
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
-                                <th>Judul Email</th>
+                                <th>Kode Surat</th>
+                                <th>Judul Surat</th>
                                 <th>Nama Pemohon</th>
                                 <th>Tipe Pengajuan</th>
                                 <th>Deskripsi Pengajuan</th>
@@ -65,9 +66,10 @@
                             <tr>
                                 <?php //if ($value['status_inbox'] <= 3) : ?>
                                 <td><?=$i++?></td>
+                                <td><?=$value['id_inbox']?></td>
                                 <td><?=$value['email_inbox']?></td>
-                                <td><?=$value['nama_inbox']?></td>
-                                <td><?=$value['tipe_inbox']?></td>
+                                <td><?=$value['nama_user']?></td>
+                                <td><?=$value['nama_tipe']?></td>
                                 <td><?=$value['deskripsi_inbox']?></td>
                                 <td><?=$value['file_inbox']?></td>
                                 <td><?=date('d/m/Y', strtotime($value['tanggal_inbox']))?></td>
@@ -109,7 +111,7 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>Dari Pemohon: </label>
-                                                    <p><?= $value['nama_inbox'] ?></p>
+                                                    <p><?= $value['nama_user'] ?></p>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="status_inbox">Status Baru: </label>
@@ -157,7 +159,7 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>Dari Pemohon: </label>
-                                                    <p><?= $value['nama_inbox'] ?></p>
+                                                    <p><?= $value['nama_user'] ?></p>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">

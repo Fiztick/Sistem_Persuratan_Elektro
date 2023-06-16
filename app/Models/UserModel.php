@@ -13,7 +13,7 @@ class UserModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['nama_user', 'nomor_induk_user', 'password_user', 'jabatan_user'];
+    protected $allowedFields = ['nama_user', 'nomor_induk_user', 'password_user', 'jabatan_user', 'status_user'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,4 +38,9 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    public function getUser($username) {
+        $builder = $this->builder($this->table)->getWhere(['nomor_induk_user' => $username]);
+        return $builder;
+    }
 }

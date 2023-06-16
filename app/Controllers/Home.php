@@ -6,6 +6,15 @@ class Home extends BaseController
 {
     public function index()
     {
+        if(session()->get('jabatan') == 0) {
+            return redirect()->to('home/admin');
+        } else {
+            return redirect()->to('home/pengajuan');
+        }
+    }
+
+    public function admin() 
+    {
         // total surat masuk
         $query = $this->db->query('SELECT * FROM inbox');
         $data['inbox_total'] = $query->getNumRows();
@@ -23,5 +32,10 @@ class Home extends BaseController
         $data['users'] = $query->getNumRows();
 
         return view ('home', $data);
+    }
+
+    public function pengajuan()
+    {
+        return view('inbox/add');
     }
 }

@@ -32,12 +32,18 @@ class User extends Migration
                 'type' => 'INT',
                 'constraint' => '1',
                 'comment' => '0 = Admin, 1 = Tendik, 2 = Dosen, 3 = Mahasiswa',
+                'unsigned'       => true,
+            ],
+            'status_user' => [
+                'type' => 'BOOLEAN',
+                'comment' => '0 = Nonaktif, 1 = Aktif',
             ],
             'created_at datetime default current_timestamp',
             'updated_at datetime default current_timestamp on update current_timestamp'
         ]);
         $this->forge->addKey('id_user', true);
         $this->forge->createTable('users');
+        $this->forge->addForeignKey('jabatan_user', 'roles', 'id_role', 'CASCADE', 'CASCADE');
     }
 
     public function down()

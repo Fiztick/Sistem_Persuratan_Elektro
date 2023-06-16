@@ -29,4 +29,9 @@
             </form>
         </div>
     </li>
+    <li class="nav-item">
+        <a href="<?= base_url('auth/logout')?>" class="nav-link" role="button">
+            <i class="fas fa-sign-out-alt"></i>
+        </a>
+    </li>
 </ul>

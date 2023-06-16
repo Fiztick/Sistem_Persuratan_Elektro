@@ -11,7 +11,7 @@ $routes = Services::routes();
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Auth');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -29,18 +29,18 @@ $routes->setAutoRoute(true);
  */
 
  // Buat bikin database make migration
-$routes->get('create-db', function() {
-    $forge = \Config\Database::forge();
+// $routes->get('create-db', function() {
+//     $forge = \Config\Database::forge();
 
-    if ($forge->createDatabase('db_spe')) {
-        echo 'Database created!';
-    }
-});
+//     if ($forge->createDatabase('db_spe')) {
+//         echo 'Database created!';
+//     }
+// });
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
-$routes->addRedirect('/', 'home');
+// $routes->addRedirect('/', 'auth');
 
 $routes->get('inbox', 'Inbox::index');
 $routes->put('inbox/(:any)', 'Inbox::update/$1');
@@ -54,6 +54,7 @@ $routes->get('user', 'User::index');
 $routes->get('user/add', 'User::create');
 $routes->post('user', 'User::store');
 $routes->get('user/edit/(:any)', 'User::edit/$1');
+$routes->put('user/updateStatus/(:any)', 'User::updateStatus/$1');
 $routes->put('user/(:any)', 'User::update/$1');
 $routes->delete('user/(:segment)', 'User::destroy/$1');
 
@@ -63,6 +64,15 @@ $routes->post('inventory', 'Inventory::store');
 $routes->get('inventory/edit/(:any)', 'Inventory::edit/$1');
 $routes->put('inventory/update/(:any)', 'Inventory::update/$1');
 $routes->delete('inventory/(:segment)', 'Inventory::destroy/$1');
+
+$routes->get('home/pengajuan', 'Inbox::create');
+$routes->get('home/kode-surat', 'Inbox::kode_surat');
+$routes->get('pencarian-surat', 'Inbox::pencarian_surat');
+$routes->post('status-surat', 'Inbox::status');
+$routes->post('inbox', 'Inbox::store');
+$routes->get('akun/(:any)', 'User::settings/$1');
+
+
 
 /*
  * --------------------------------------------------------------------

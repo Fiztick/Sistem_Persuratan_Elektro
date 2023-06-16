@@ -28,6 +28,7 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3><?= esc($inbox_total) ?></h3>
+                            
                             <p>Total Surat yang Masuk</p>
                         </div>
                         <div class="icon">
@@ -71,7 +72,7 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3><h3><?= esc($users) ?></h3></h3>
+                            <h3><?= esc($users) ?></h3>
 
                             <p>Jumlah User</p>
                         </div>

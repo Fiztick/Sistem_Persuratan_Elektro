@@ -69,6 +69,24 @@ class User extends BaseController
         }
     }
 
+    public function updateStatus($id = null)
+    {
+        if(!empty($id)) {
+            if($this->user_model->countAllResults() > 0) {
+                $data = ['status_user' => $this->request->getVar('status_user'),];
+                
+                $update = $this->user_model->where('id_user',$id)->set($data)->update();
+                if($update) {
+                    return redirect()->to(site_url('user'))->with('success', 'Status Berhasil Diupdate');  
+                }
+            } else {
+                throw \CodeIgniter\Exceptions\PageNotFoundExecption::forPageNotFound();
+            }
+        } else {
+            return redirect()->to('user');
+        }
+    }
+
     public function update($id)
     {
         $c_password = $this->request->getVar('c_password_user');
@@ -92,5 +110,12 @@ class User extends BaseController
     public function destroy($id) {
         $this->user_model->delete($id);
         return redirect()->to(site_url('user'))->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function settings($id) {
+        $query = $this->user_model->find($id);
+        $this->data['user'] = $query;
+                
+        return view('users/settings', $this->data);
     }
 }
