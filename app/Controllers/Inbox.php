@@ -9,6 +9,8 @@ use CodeIgniter\Files\File;
 
 class Inbox extends BaseController
 {
+    protected $helpers = ['form'];
+
     public function __construct()
     {
         // $this->request = \Config\Services::request();
@@ -86,6 +88,19 @@ class Inbox extends BaseController
 
     public function store()
     {
+        $rules = [
+            'email_inbox' => 'required',
+            'tipe_inbox' => 'required',
+            'deskripsi_inbox' => 'required|max_length[50]',
+        ];
+
+        if (! $this->validate($rules)) {
+            $data['tipe'] = $this->tipe_model->findAll();
+
+            $validation = \Config\Services::validation();
+            return redirect()->to(site_url('home/pengajuan'))->withInput()->with('error', $validation->listErrors());
+        }
+
         $id_surat = Uuid::uuid4()->toString();
         $data = [
             'id_inbox' => $id_surat,
@@ -114,9 +129,22 @@ class Inbox extends BaseController
         return redirect()->to(site_url('home/kode-surat'))->with('success', 'Surat Berhasil Dikirim')->with('id_surat', $id_surat);
     }
 
+    function download($id)
+    {
+        $data = $this->inbox_model->find($id);
+        $tanggal_file = strtotime($data['tanggal_inbox']);
+        $tanggal_file = date('d-m-Y', $tanggal_file);
+        // echo $tanggal_file;
+        // var_dump($data);
+        $file = WRITEPATH . 'uploads/' . $tanggal_file . '/' . $data['file_inbox'];
+        return $this->response->download($file, null);
+    }
+
+    // status kebawah nnti pindahin ke controller sendiri biar lebih enak ama routingnya diubah
     public function kode_surat()
     {
         $this->data['id_surat'] = session()->get('id_surat');
+
         return view('inbox/kode_surat', $this->data);
     }
 

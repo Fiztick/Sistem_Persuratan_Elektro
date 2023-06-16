@@ -20,7 +20,6 @@ class Inbox extends Migration
             'deskripsi_inbox' => [
                 'type' => 'VARCHAR',
                 'constraint' => '50',
-                'null' => true,
             ],
             'file_inbox' => [
                 'type' => 'VARCHAR',

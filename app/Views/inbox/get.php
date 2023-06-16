@@ -71,7 +71,11 @@
                                 <td><?=$value['nama_user']?></td>
                                 <td><?=$value['nama_tipe']?></td>
                                 <td><?=$value['deskripsi_inbox']?></td>
-                                <td><?=$value['file_inbox']?></td>
+                                <?php if (!empty($value['file_inbox'])): ?>
+                                <td><a href="<?=site_url('download/'.$value['id_inbox'])?>"><i class="far fa-file fa-3x" style="color: #7a7a7a"></i></a></td>
+                                <?php else: ?>
+                                <td>Tidak ada file yang diupload</td>
+                                <?php endif ?>
                                 <td><?=date('d/m/Y', strtotime($value['tanggal_inbox']))?></td>
                                 <td>
                                     <a href="#" class="fa fa-pencil-alt" data-toggle="modal"
