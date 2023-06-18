@@ -62,7 +62,7 @@
 
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="info">
-                        <a href="#" class="d-block">
+                        <a class="d-block">
                             <i class="fas fa-user mr-3" style="color: #ffffff;"></i>
                             <?= $_SESSION['nama']?>
                         </a>

@@ -37,7 +37,7 @@ class Auth extends BaseController
                 'id' => $user->id_user,
                 'nama' => $user->nama_user,
                 'niu' => $user->nomor_induk_user,
-                'jabatan' => $user->jabatan_user,
+                'jabatan' => $user->id_role,
                 'status' => $user->status_user,
                 'login' => true,
             ];

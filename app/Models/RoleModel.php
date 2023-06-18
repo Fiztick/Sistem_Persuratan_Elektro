@@ -4,16 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class UserModel extends Model
+class RoleModel extends Model
 {
     protected $DBGroup      = 'default';
-    protected $table      = 'users';
-    protected $primaryKey = 'id_user';
-    protected $useAutoIncrement = true;
+    protected $table      = 'roles';
+    protected $primaryKey = 'id_role';
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['nama_user', 'nomor_induk_user', 'password_user', 'id_role', 'status_user'];
+    protected $allowedFields = ['id_role', 'nama_role'];
 
     // Dates
     protected $useTimestamps = false;
@@ -38,9 +37,4 @@ class UserModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function getUser($username) {
-        $builder = $this->builder($this->table)->getWhere(['nomor_induk_user' => $username]);
-        return $builder;
-    }
 }

@@ -19,10 +19,8 @@ class LoginFilter implements FilterInterface
 
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        // $current = (string)current_url(true)->setHost('')->setScheme('')->stripQuery('token');
-        // // // jika sudah login
-        // if (in_array((string)$current, [route_to('login'), route_to('lupa-password'), route_to('reset')]) && session()->has('login')) {
-        //     return redirect()->to('dashboard');
+        // if (session()->has('login')) {
+        //     return redirect()->to(base_url('home'));
         // }
     }
 }

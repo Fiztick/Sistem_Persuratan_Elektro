@@ -28,7 +28,7 @@ class User extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '60',
             ],
-            'jabatan_user' => [
+            'id_role' => [
                 'type' => 'INT',
                 'constraint' => '1',
                 'comment' => '0 = Admin, 1 = Tendik, 2 = Dosen, 3 = Mahasiswa',
@@ -43,7 +43,7 @@ class User extends Migration
         ]);
         $this->forge->addKey('id_user', true);
         $this->forge->createTable('users');
-        $this->forge->addForeignKey('jabatan_user', 'roles', 'id_role', 'CASCADE', 'CASCADE');
+        $this->forge->addForeignKey('id_role', 'roles', 'id_role', 'CASCADE', 'CASCADE');
     }
 
     public function down()

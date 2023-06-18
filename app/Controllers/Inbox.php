@@ -154,6 +154,50 @@ class Inbox extends BaseController
         return $this->response->download($file, null);
     }
 
+    private function totalChecker($keyword) 
+    {
+        $query = "status_inbox < 3";
+
+        // dd($this->users);
+
+        if (!empty($this->users)) {
+            return $this->inbox_model->groupStart()
+                ->like('email_inbox', $keyword)
+                ->orWhereIn('id_user', $this->users)
+                ->groupEnd()
+                ->where($query)
+                ->countAllResults();
+        } else {
+            return $this->inbox_model->groupStart()
+                ->like('email_inbox', $keyword)
+                ->groupEnd()
+                ->where($query)
+                ->countAllResults();
+        }
+    }
+
+    private function inboxChecker($keyword) 
+    {
+        $query = "status_inbox < 3";
+
+        if (!empty($this->users)) {
+            return $this->inbox_model->groupStart()
+                ->like('email_inbox', $keyword, 'BOTH')
+                ->orWhereIn('id_user', $this->users)
+                ->where($query)
+                ->groupEnd()
+                ->orderBy('tanggal_inbox', 'DESC')
+                ->paginate($this->data['perPage']);
+        } else {
+            return $this->inbox_model->groupStart()
+                ->like('email_inbox', $keyword, 'BOTH')
+                ->where($query)
+                ->groupEnd()
+                ->orderBy('tanggal_inbox', 'DESC')
+                ->paginate($this->data['perPage']);
+        }
+    }
+
     public function search()
     {
         $keyword = $this->request->getVar('keyword');
@@ -170,8 +214,10 @@ class Inbox extends BaseController
         $user_object = $builder->Like('nama_user', $keyword)->get()->getResult(); // Add this line
 
         foreach ($user_object as $user) {
-            $users[] = $user->id_user;
+            $this->users[] = $user->id_user;
         }
+
+        $this->users = array_unique($this->users);
 
         //ngambil smua data
         $builder = $this->inbox_model->builder();
@@ -188,25 +234,10 @@ class Inbox extends BaseController
             $typeNames[$data->tipe_inbox] = $data->nama_tipe;
         }
 
-        $query = "status_inbox < 3";
-
         $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
         $this->data['perPage'] =  10;
-        // $this->data['total'] =  $this->inbox_model->like('email_inbox', $keyword, 'BOTH')->orWhereIn('id_user', $users)->orWhere($query)->countAllResults();
-        $this->data['total'] = $this->inbox_model->groupStart()
-            ->like('email_inbox', $keyword)
-            ->orWhereIn('id_user', $users)
-            ->groupEnd()
-            ->where($query)
-            ->countAllResults();
-        // $this->data['inbox'] = $this->inbox_model->like('email_inbox', $keyword, 'BOTH')->orWhereIn('id_user', $users)->orWhere($query)->orderBy('tanggal_inbox', 'DESC')->paginate($this->data['perPage']);
-        $this->data['inbox'] = $this->inbox_model->groupStart()
-            ->like('email_inbox', $keyword, 'BOTH')
-            ->orWhereIn('id_user', $users)
-            ->where($query)
-            ->groupEnd()
-            ->orderBy('tanggal_inbox', 'DESC')
-            ->paginate($this->data['perPage']);
+        $this->data['total'] = $this->totalChecker($keyword);
+        $this->data['inbox'] = $this->inboxChecker($keyword);
         $this->data['total_res'] = is_array($this->data['inbox'])? count($this->data['inbox']) : 0;
         $this->data['pager'] = $this->inbox_model->pager;
 

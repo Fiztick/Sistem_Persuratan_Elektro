@@ -66,7 +66,7 @@
                                 <td>
                                     <?php
                                         $jabatan = array('Admin', 'Tendik', 'Dosen', 'Mahasiswa');
-                                        echo $jabatan[$value['jabatan_user']]
+                                        echo $jabatan[$value['id_role']]
                                     ?>
                                 </td>
                                 <td>

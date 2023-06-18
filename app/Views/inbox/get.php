@@ -50,12 +50,12 @@
                         <div class="row">
                             <div class="col">
                                 <div class="btn-group ml-2">
-                                    <a href="<?= site_url('inbox') ?>"
-                                        class="btn btn-secondary <?= $perPage == 10 ? 'active' : '' ?>">10</a>
+                                    <a href="<?= site_url('inbox?perPage=10') ?>"
+                                        class="btn btn-secondary <?= session()->get('perPage') == 10 ? 'active' : '' ?>">10</a>
                                     <a href="<?= site_url('inbox?perPage=50') ?>"
-                                        class="btn btn-secondary <?= $perPage == 50 ? 'active' : '' ?>">50</a>
+                                        class="btn btn-secondary <?= session()->get('perPage') == 50 ? 'active' : '' ?>">50</a>
                                     <a href="<?= site_url('inbox?perPage=100') ?>"
-                                        class="btn btn-secondary <?= $perPage == 100 ? 'active' : '' ?>">100</a>
+                                        class="btn btn-secondary <?= session()->get('perPage') == 100 ? 'active' : '' ?>">100</a>
                                 </div>
                             </div>
                             <div class="col-4 d-flex justify-content-end">

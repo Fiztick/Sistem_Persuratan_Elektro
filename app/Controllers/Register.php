@@ -28,7 +28,7 @@ class Register extends BaseController
         $data = [
             'nama_user' => $nama,
             'nomor_induk_user' => $niu,
-            'jabatan_user' => $jabatan,
+            'id_role' => $jabatan,
         ];
 
         if($password != $cpassword) {

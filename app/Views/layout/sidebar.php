@@ -47,6 +47,14 @@
         </p>
     </a>
 </li>
+<li class="nav-item">
+<a href="<?= site_url('settings')?>" class="nav-link">
+        <i class="nav-icon fas fa-users"></i>
+        <p>
+            Pengaturan Akun
+        </p>
+    </a>
+</li>
 <?php endif ?>
 
 <?php if (session()->get('jabatan') > 0) : ?>
@@ -69,10 +77,10 @@
 </li>
 <li class="nav-header">USER</li>
 <li class="nav-item">
-    <a href="<?= site_url('akun/'.session()->get('id'))?>" class="nav-link">
+    <a href="<?= site_url('settings')?>" class="nav-link">
         <i class="nav-icon fas fa-users"></i>
         <p>
-            Akun
+            Pengaturan Akun
         </p>
     </a>
 </li>

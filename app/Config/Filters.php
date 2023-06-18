@@ -74,7 +74,7 @@ class Filters extends BaseConfig
                 'mailbox', 'mailbox/*',
                 'inventory', 'inventory/*', 
                 'user', 'user/*'
-            ],
+            ]
         ],
         'user' => [
             'before' => [

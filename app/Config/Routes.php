@@ -72,9 +72,8 @@ $routes->get('pencarian-surat', 'Inbox::pencarian_surat');
 $routes->post('status-surat', 'Inbox::status');
 $routes->get('download/(:any)', 'Inbox::download/$1');
 
-$routes->get('akun/(:any)', 'User::settings/$1');
-
-
+$routes->get('settings', 'Settings::index');
+$routes->put('settings/(:any)', 'Settings::update/$1');
 
 /*
  * --------------------------------------------------------------------

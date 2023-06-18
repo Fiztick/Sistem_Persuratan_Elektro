@@ -72,11 +72,11 @@
                         </div>
                         <div class="form-group">
                             <label>Jabatan User</label>
-                            <select name="jabatan_user" class="custom-select" required>
+                            <select name="id_role" class="custom-select" required>
                                 <?php 
                                 $jabatan = array('Admin', 'Tendik', 'Dosen', 'Mahasiswa');
                                 foreach($jabatan as $key => $opsi) :
-                                    if($key == $user['jabatan_user']) {
+                                    if($key == $user['id_role']) {
                                         echo "<option selected value='".$key."'>".$opsi."</option>";
                                     } else {
                                         echo "<option value='".$key."'>".$opsi."</option>";

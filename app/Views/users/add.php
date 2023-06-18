@@ -61,7 +61,7 @@
                         </div>
                         <div class="form-group">
                             <label>Jabatan User</label>
-                            <select name="jabatan_user" class="custom-select" required>
+                            <select name="id_role" class="custom-select" required>
                                 <option selected value="">Pilih Jabatan User</option>
                                 <option value="1">Tendik</option>
                                 <option value="2">Dosen</option>

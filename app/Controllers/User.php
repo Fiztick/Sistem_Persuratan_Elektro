@@ -2,15 +2,14 @@
 
 namespace App\Controllers;
 use App\Models\UserModel;
+use App\Models\RoleModel;
 
 class User extends BaseController
 {
     public function __construct()
     {
-        // $this->request = \Config\Services::request();
-        // $this->session = session();
         $this->user_model = new UserModel;
-        // $this->data = ['session' => $this->session,'request'=>$this->request];
+        $this->role_model = new RoleModel;
     }
 
     public function index()
@@ -43,7 +42,7 @@ class User extends BaseController
                 'nama_user' => $this->request->getVar('nama_user'),
                 'nomor_induk_user' => $niu,
                 'password_user' => password_hash($this->request->getVar('nomor_induk_user'), PASSWORD_BCRYPT),
-                'jabatan_user' => $this->request->getVar('jabatan_user'),
+                'id_role' => $this->request->getVar('id_role'),
             ];
 
             $this->db->table('users')->insert($data);
@@ -97,7 +96,7 @@ class User extends BaseController
                 'nama_user' => $this->request->getVar('nama_user'),
                 'nomor_induk_user' => $this->request->getVar('nomor_induk_user'),
                 'password_user' => password_hash($password, PASSWORD_BCRYPT),
-                'jabatan_user' => $this->request->getVar('jabatan_user'),
+                'id_role' => $this->request->getVar('id_role'),
             ];
     
             $this->user_model->where('id_user',$id)->set($data)->update();
@@ -110,12 +109,5 @@ class User extends BaseController
     public function destroy($id) {
         $this->user_model->delete($id);
         return redirect()->to(site_url('user'))->with('success', 'Data Berhasil Dihapus');
-    }
-
-    public function settings($id) {
-        $query = $this->user_model->find($id);
-        $this->data['user'] = $query;
-                
-        return view('users/settings', $this->data);
     }
 }
