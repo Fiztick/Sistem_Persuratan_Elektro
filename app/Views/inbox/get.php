@@ -49,14 +49,6 @@
                     <table class="table table-bordered">
                         <div class="row">
                             <div class="col">
-                                <div class="btn-group ml-2">
-                                    <a href="<?= site_url('inbox?perPage=10') ?>"
-                                        class="btn btn-secondary <?= session()->get('perPage') == 10 ? 'active' : '' ?>">10</a>
-                                    <a href="<?= site_url('inbox?perPage=50') ?>"
-                                        class="btn btn-secondary <?= session()->get('perPage') == 50 ? 'active' : '' ?>">50</a>
-                                    <a href="<?= site_url('inbox?perPage=100') ?>"
-                                        class="btn btn-secondary <?= session()->get('perPage') == 100 ? 'active' : '' ?>">100</a>
-                                </div>
                             </div>
                             <div class="col-4 d-flex justify-content-end">
                                 <form action="<?= site_url('inbox/search') ?>" class="form-inline" method="get">

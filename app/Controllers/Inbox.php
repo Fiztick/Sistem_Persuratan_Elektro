@@ -28,8 +28,6 @@ class Inbox extends BaseController
             return $this->search();
         }
 
-        $this->data['perPage'] = $this->request->getVar('perPage') ?? 10;
-
         $query = "status_inbox < 3";
 
         $builder = $this->inbox_model->builder();
@@ -47,6 +45,7 @@ class Inbox extends BaseController
         }
 
         $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
+        $this->data['perPage'] = 15;
         $this->data['total'] =  $this->inbox_model->where($query)->countAllResults();
         $this->data['inbox'] = $this->inbox_model->where($query)->orderBy('tanggal_inbox', 'DESC')->paginate($this->data['perPage']);
         $this->data['total_res'] = is_array($this->data['inbox'])? count($this->data['inbox']) : 0;
@@ -217,7 +216,9 @@ class Inbox extends BaseController
             $this->users[] = $user->id_user;
         }
 
-        $this->users = array_unique($this->users);
+        if(!empty($this->users)) {
+            $this->users = array_unique($this->users);
+        }
 
         //ngambil smua data
         $builder = $this->inbox_model->builder();
@@ -235,7 +236,7 @@ class Inbox extends BaseController
         }
 
         $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
-        $this->data['perPage'] =  10;
+        $this->data['perPage'] =  15;
         $this->data['total'] = $this->totalChecker($keyword);
         $this->data['inbox'] = $this->inboxChecker($keyword);
         $this->data['total_res'] = is_array($this->data['inbox'])? count($this->data['inbox']) : 0;
