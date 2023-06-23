@@ -35,8 +35,8 @@ class Filters extends BaseConfig
             // 'honeypot',
             'csrf',
             'ceklogin' => [
-				'except' => ['/', 'auth', 'auth/*', 'register', 'register/*',]
-			],
+                'except' => ['/', 'Auth', 'Auth/*', 'Register', 'Register/*', 'Status_Surat', 'Status_Surat/*', 'pencarian-surat', 'status-surat']
+            ],            
         ],
         'after' => [
             'toolbar',

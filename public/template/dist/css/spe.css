@@ -1,0 +1,57 @@
+.sidebar-dark-primary {
+    background-color: #009688;
+}
+
+[class*=sidebar-dark] .brand-link, [class*=sidebar-dark] .brand-link .pushmenu {
+    color: #fff;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link {
+    color: #fff;
+}
+
+[class*=sidebar-dark-] .sidebar a {
+	color: #fff;
+}
+
+[class*=sidebar-dark-] .nav-header {
+	color: #fff;
+}
+
+[class*=sidebar-dark] .brand-link {
+	border-bottom: 1px solid #fff;
+}
+
+.circle {
+    position: relative;
+    width: 10vw;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 0.75vw solid #dc3545;
+    color: #dc3545;
+}
+
+.circle label {
+    font-size: 1vw;
+    padding: 0.1vw;
+}
+
+.line {
+    border-top: 10px solid #dc3545;
+    width: 75px;
+    color: #dc3545;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.success {
+    color: #28a745;
+    border-color: #28a745;
+}
+
+.top {
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,.125);
+}

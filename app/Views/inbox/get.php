@@ -79,7 +79,6 @@
                         <tbody>
                             <?php $i=1; foreach ($inbox as $value) : ?>
                             <tr>
-                                <?php //if ($value['status_inbox'] <= 3) : ?>
                                 <td><?=$i++?></td>
                                 <td><?=$value['id_inbox']?></td>
                                 <td><?=$value['email_inbox']?></td>
@@ -109,7 +108,6 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
-                                <?php //endif; ?>
                             </tr>
 
                             <!-- Modal Update-->

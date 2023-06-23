@@ -251,30 +251,5 @@ class Inbox extends BaseController
         return view('inbox/get', $this->data);
     }
 
-    // status kebawah nnti pindahin ke controller sendiri biar lebih enak ama routingnya diubah
-    public function kode_surat()
-    {
-        $this->data['id_surat'] = session()->get('id_surat');
-
-        return view('inbox/kode_surat', $this->data);
-    }
-
-    public function pencarian_surat()
-    {
-        return view('inbox/cari_status');
-    }
-
-    public function status()
-    {
-        $id_inbox = $this->request->getVar('id_inbox');
-        $builder = $this->inbox_model->builder();
-
-        $builder->join('users', 'users.id_user = inbox.id_user');
-        $builder->join('tipe', 'tipe.id_tipe = inbox.tipe_inbox');
-        $builder->where('id_inbox', $id_inbox);
-        $data['inbox'] = $builder->get()->getRow();
-        unset($data['inbox']->password_user);       
-
-        return view('inbox/status', $data);
-    }
+    
 }

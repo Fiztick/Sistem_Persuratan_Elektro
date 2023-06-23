@@ -67,13 +67,15 @@ $routes->delete('inventory/(:segment)', 'Inventory::destroy/$1');
 
 $routes->get('home/pengajuan', 'Inbox::create');
 $routes->post('inbox', 'Inbox::store');
-$routes->get('home/kode-surat', 'Inbox::kode_surat');
-$routes->get('pencarian-surat', 'Inbox::pencarian_surat');
-$routes->post('status-surat', 'Inbox::status');
 $routes->get('download/(:any)', 'Inbox::download/$1');
 
 $routes->get('settings', 'Settings::index');
 $routes->put('settings/(:any)', 'Settings::update/$1');
+
+$routes->get('lihat-status', 'Status::index');
+
+$routes->get('pencarian-surat', 'Status_Surat::index');
+$routes->post('status-surat', 'Status_Surat::getSurat');
 
 /*
  * --------------------------------------------------------------------

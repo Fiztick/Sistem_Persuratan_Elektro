@@ -1,10 +1,11 @@
 <?= $this->extend('layout/auth_template') ?>
 
 <?= $this->section('title') ?>
-<title>Login &mdash; Sistem Persuratan Elektro</title>
+<title>Pencarian Surat &mdash; Sistem Persuratan Elektro</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
 <?php if(session()->getFlashdata('success')) : ?>
 <div class="alert alert-success alert-dismissible show fade">
     <div class="alert-body">
@@ -25,29 +26,26 @@
 </div>
 <?php endif ?>
 
-<p class="login-box-msg">Login untuk memulai sesi</p>
-<form action="<?=site_url('auth/proses')?>" method="post">
+
+
+<p class="login-box-msg">Masukkan kode surat</p>
+<form action="<?=site_url('status-surat')?>" method="post" autocomplete="off">
     <?= csrf_field() ?>
-    <div class="input-group mb-3">
-        <input type="username" class="form-control" placeholder="NIM/NIP" name="username" id="username" required>
-        <div class="input-group-append">
-        </div>
-    </div>
-    <div class="input-group mb-3">
-        <input type="password" class="form-control" placeholder="Password" name="password" id="password" required>
-        <div class="input-group-append">
-        </div>
+    <div class="form-group">
+        <input type="text" name="id_inbox" class="form-control" required autofocus>
     </div>
     <div class="mb-3">
-        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>
+            Cari Surat</button>
+        <button type="reset" class="btn btn-secondary">Reset</button>
     </div>
 </form>
 <p class="mb-0">
-    Belum punya akun?
-    <a href="<?=site_url('register')?>" class="text-center">Buat Akun</a>
+    Sudah punya akun?
+    <a href="<?=site_url()?>" class="text-center">Login</a>
 </p>
 <p class="mb-0">
-    Sudah punya kode surat?
-    <a href="<?=site_url('pencarian-surat')?>" class="text-center">Cari Kode Surat</a>
+    Belum punya akun?
+    <a href="<?=site_url('register')?>" class="text-center">Buat Akun</a>
 </p>
 <?= $this->endSection() ?>

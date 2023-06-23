@@ -68,7 +68,7 @@
     </a>
 </li>
 <li class="nav-item">
-    <a href="<?= site_url('pencarian-surat') ?>" class="nav-link">
+    <a href="<?= site_url('lihat-status') ?>" class="nav-link">
         <i class="nav-icon fas fa-spinner"></i>
         <p>
             Lihat Status Surat

@@ -25,6 +25,7 @@
 </div>
 <?php endif ?>
 
+<p class="login-box-msg">Buat akun</p>
 <form action="<?=site_url('register/proses')?>" method="post">
     <?= csrf_field() ?>
     <div class="input-group mb-3">
@@ -64,5 +65,9 @@
 <p class="mb-0">
     Sudah punya akun?
     <a href="<?=site_url()?>" class="text-center">Login</a>
+</p>
+<p class="mb-0">
+    Sudah punya kode surat?
+    <a href="<?=site_url('pencarian-surat')?>" class="text-center">Cari Kode Surat</a>
 </p>
 <?= $this->endSection() ?>
