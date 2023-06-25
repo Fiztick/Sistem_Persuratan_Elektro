@@ -25,7 +25,7 @@
 </div>
 <?php endif ?>
 
-<p class="login-box-msg">Buat akun</p>
+<p class="register-box-msg">Buat akun</p>
 <form action="<?=site_url('register/proses')?>" method="post">
     <?= csrf_field() ?>
     <div class="input-group mb-3">

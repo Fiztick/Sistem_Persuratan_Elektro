@@ -37,8 +37,8 @@
 }
 
 .line {
-    border-top: 10px solid #dc3545;
-    width: 75px;
+    border-top: 0.75vw solid #dc3545;
+    width: 7vw;
     color: #dc3545;
 }
 
@@ -54,4 +54,10 @@ ul {
 .top {
     width: 100%;
     border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.btm {
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+    margin-bottom: 20px;
 }

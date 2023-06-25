@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>/template/dist/css/spe.css">
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="margin:20px">
     <!-- /.login-logo -->
     <div class="card card-outline d-flex">
         <div class="card-header text-center">
@@ -46,41 +46,48 @@
         </div>
         <?php endif ?>
         <div class="card-body">
-            <p class="login-box-msg">Status surat</p>
-            <div class="d-flex justify-content-center align-items-center text-center">
-                <div class="line d-flex <?= ($inbox->status_inbox >= 0) ? 'success' : '' ?>"></div>
-                <div
-                    class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 0) ? 'success' : '' ?>">
-                    <label>Surat Diajukan</label>
+            <div class="card-body">
+                <div class="card-header">
+                    <div class="d-flex justify-content-center">
+                        Status surat
+                    </div>
                 </div>
-                <div class="line d-flex <?= ($inbox->status_inbox >= 1) ? 'success' : '' ?>"></div>
-                <div
-                    class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 1) ? 'success' : '' ?>">
-                    <label>Surat Diproses</label>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center align-items-center text-center">
+                        <div class="line d-flex <?= ($inbox->status_inbox >= 0) ? 'success' : '' ?>"></div>
+                        <div
+                            class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 0) ? 'success' : '' ?>">
+                            <label>Surat Diajukan</label>
+                        </div>
+                        <div class="line d-flex <?= ($inbox->status_inbox >= 1) ? 'success' : '' ?>"></div>
+                        <div
+                            class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 1) ? 'success' : '' ?>">
+                            <label>Surat Diproses</label>
+                        </div>
+                        <div class="line d-flex <?= ($inbox->status_inbox >= 2) ? 'success' : '' ?>"></div>
+                        <div
+                            class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 2) ? 'success' : '' ?>">
+                            <label>Diteruskan Ke Direktorat Terkait</label>
+                        </div>
+                        <div class="line d-flex <?= ($inbox->status_inbox >= 3) ? 'success' : '' ?>"></div>
+                        <div
+                            class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 3) ? 'success' : '' ?>">
+                            <?php if ($inbox->status_inbox < 3) : ?>
+                            <label>Selesai</label>
+                            <?php elseif ($inbox->status_inbox == 3) : ?>
+                            <label class="success">Di Ambil di Jurusan</label>
+                            <?php elseif ($inbox->status_inbox == 4) : ?>
+                            <label class="success">Di Email</label>
+                            <?php endif; ?>
+                        </div>
+                        <div class="line d-flex <?= ($inbox->status_inbox >= 3) ? 'success' : '' ?>"></div>
+                    </div>
                 </div>
-                <div class="line d-flex <?= ($inbox->status_inbox >= 2) ? 'success' : '' ?>"></div>
-                <div
-                    class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 2) ? 'success' : '' ?>">
-                    <label>Diteruskan Ke Direktorat Terkait</label>
-                </div>
-                <div class="line d-flex <?= ($inbox->status_inbox >= 3) ? 'success' : '' ?>"></div>
-                <div
-                    class="circle d-flex justify-content-center align-items-center <?= ($inbox->status_inbox >= 3) ? 'success' : '' ?>">
-                    <?php if ($inbox->status_inbox < 3) : ?>
-                    <label>Selesai</label>
-                    <?php elseif ($inbox->status_inbox == 3) : ?>
-                    <label class="success">Di Ambil di Jurusan</label>
-                    <?php elseif ($inbox->status_inbox == 4) : ?>
-                    <label class="success">Di Email</label>
-                    <?php endif; ?>
-                </div>
-                <div class="line d-flex <?= ($inbox->status_inbox >= 3) ? 'success' : '' ?>"></div>
             </div>
-            <div class="divide"></div>
             <div class="card-body">
                 <div class="card-header top">
-                    <div class="d-flex justify-content-between">
-                        Pemohon
+                    <div class="d-flex justify-content-center">
+                        Informasi Surat
                     </div>
                 </div>
                 <div class="card-body ">
