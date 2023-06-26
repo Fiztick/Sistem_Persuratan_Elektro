@@ -116,7 +116,13 @@ class Inbox extends BaseController
             return redirect()->to(site_url('home/pengajuan'))->withInput()->with('error', $validation->listErrors());
         }
 
-        $id_surat = Uuid::uuid4()->toString();
+        $builder = $this->inbox_model->builder();
+        $jml_row_submission = (int)$builder->countAllResults();
+
+        $niu = session()->get('niu');
+
+        $id_surat = $niu . '_' . ($jml_row_submission + 1);
+        
         $data = [
             'id_inbox' => $id_surat,
             'email_inbox' => $this->request->getVar('email_inbox'),
@@ -141,7 +147,7 @@ class Inbox extends BaseController
 
         $query = $this->inbox_model->allowEmptyInserts(true)->insert($data);
         
-        return redirect()->to(site_url('home/kode-surat'))->with('success', 'Surat Berhasil Dikirim')->with('id_surat', $id_surat);
+        return redirect()->to(site_url('home/pengajuan'))->with('success', 'Surat Berhasil Dikirim')->with('id_surat', $id_surat);
     }
 
     function download($id)

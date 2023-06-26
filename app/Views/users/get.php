@@ -60,16 +60,16 @@
                         <tbody>
                             <?php $i=1; foreach ($users as $value) : ?>
                             <tr>
-                                <td><?=$i++?></td>
-                                <td><?=$value['nama_user']?></td>
-                                <td><?=$value['nomor_induk_user']?></td>
-                                <td>
+                                <td class="align-middle"><?=$i++?></td>
+                                <td class="align-middle"><?=$value['nama_user']?></td>
+                                <td class="align-middle"><?=$value['nomor_induk_user']?></td>
+                                <td class="align-middle">
                                     <?php
                                         $jabatan = array('Admin', 'Tendik', 'Dosen', 'Mahasiswa');
                                         echo $jabatan[$value['id_role']]
                                     ?>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <?php if($value['status_user'] == 0) : ?>
                                         <button href="#" class="fa fa-pencil-alt btn-outline-secondary p-2" data-toggle="modal"
                                         data-target="#status-modal<?=$value['id_user']?>">
@@ -85,7 +85,7 @@
                                     ?>
                                     </button>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <a href="<?=site_url('user/edit/'.$value['id_user'])?>" class="btn btn-primary m-2">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>

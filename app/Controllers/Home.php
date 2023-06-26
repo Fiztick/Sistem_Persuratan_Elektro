@@ -16,16 +16,16 @@ class Home extends BaseController
     public function admin() 
     {
         // total surat masuk
-        $query = $this->db->query('SELECT * FROM inbox');
+        $query = $this->db->query('SELECT * FROM inbox WHERE status_inbox < 3');
         $data['inbox_total'] = $query->getNumRows();
+        
+        // total surat selesai
+        $query = $this->db->query('SELECT * FROM inbox WHERE status_inbox >= 3');
+        $data['inbox_selesai'] = $query->getNumRows();
 
         // total surat diproses
-        $query = $this->db->query('SELECT * FROM inbox WHERE status_inbox<3');
-        $data['inbox_diproses'] = $query->getNumRows();
-
-        // total surat selesai
-        $query = $this->db->query('SELECT * FROM inbox WHERE status_inbox>=3');
-        $data['inbox_selesai'] = $query->getNumRows();
+        $query = $this->db->query('SELECT * FROM inventory');
+        $data[''] = $query->getNumRows();
 
         // user
         $query = $this->db->query('SELECT * FROM users');

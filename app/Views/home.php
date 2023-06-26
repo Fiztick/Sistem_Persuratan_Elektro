@@ -29,12 +29,12 @@
                         <div class="inner">
                             <h3><?= esc($inbox_total) ?></h3>
                             
-                            <p>Total Surat yang Masuk</p>
+                            <p>Surat yang Masuk</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-email"></i>
                         </div>
-                        <a href="inbox" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?=base_url('inbox')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -42,14 +42,14 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                        <h3><?= esc($inbox_diproses) ?></h3>
+                        <h3><?= esc($inbox_selesai) ?></h3>
 
-                            <p>Surat yang Diproses</p>
+                            <p>Surat yang Selesai</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-email-unread"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?=base_url('mailbox')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -59,12 +59,12 @@
                         <div class="inner">
                         <h3><?= esc($inbox_selesai) ?></h3>
 
-                            <p>Surat yang Selesai</p>
+                            <p>Surat di Inventarisasi</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-ios-email"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?=base_url('inventory')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -79,7 +79,7 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="user" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="<?=base_url('user')?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
