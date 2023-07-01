@@ -31,6 +31,7 @@ class BaseSeeder extends Seeder
             [
                 'nama_user' => 'Admin',
                 'nomor_induk_user' => '0',
+                'email_user' => 'admin@pnj.com',
                 'password_user' => password_hash('0', PASSWORD_BCRYPT),
                 'id_role' => '0',
                 'status_user' => '1',
@@ -38,6 +39,7 @@ class BaseSeeder extends Seeder
             [
                 'nama_user' => 'Tendik',
                 'nomor_induk_user' => '1',
+                'email_user' => 'tendik@pnj.com',
                 'password_user' => password_hash('1', PASSWORD_BCRYPT),
                 'id_role' => '1',
                 'status_user' => '1',
@@ -45,6 +47,7 @@ class BaseSeeder extends Seeder
             [
                 'nama_user' => 'Dosen',
                 'nomor_induk_user' => '2',
+                'email_user' => 'dosen@pnj.com',
                 'password_user' => password_hash('2', PASSWORD_BCRYPT),
                 'id_role' => '2',
                 'status_user' => '1',
@@ -52,6 +55,7 @@ class BaseSeeder extends Seeder
             [
                 'nama_user' => 'Mahasiswa',
                 'nomor_induk_user' => '3',
+                'email_user' => 'mhsw@pnj.com',
                 'password_user' => password_hash('3', PASSWORD_BCRYPT),
                 'id_role' => '3',
                 'status_user' => '1',

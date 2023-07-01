@@ -30,7 +30,8 @@
     <link rel="stylesheet" href="<?= base_url() ?>/template/plugins/summernote/summernote-bs4.min.css">
     <!-- custom -->
     <link rel="stylesheet" href="<?= base_url() ?>/template/dist/css/spe.css">
-
+    <!-- datatable -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
     <style>
     .user-panel {
         border-bottom: 1px solid #fff !important;
@@ -135,8 +136,8 @@
     <!-- AdminLTE App -->
     <script src="<?= base_url() ?>/template/dist/js/adminlte.js"></script>
 
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <!-- <script src="<?= base_url() ?>/template/dist/js/pages/dashboard.js"></script> -->
+    <!-- DataTables  & Plugins -->
+    <script src="<?= base_url() ?>/template/plugins/datatables/jquery.dataTables.min.js"></script>
 </body>
 
 </html>

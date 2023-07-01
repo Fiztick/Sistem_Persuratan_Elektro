@@ -30,11 +30,15 @@
     <?= csrf_field() ?>
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Nama" name="nama" id="nama"
-            value="<?= isset(session()->get('data')['nama']) ? session()->get('data')['nama'] : '' ?>" required>
+            value="<?= isset(session()->get('data')['nama_user']) ? session()->get('data')['nama_user'] : '' ?>" required>
     </div>
     <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="NIM/NIP" name="niu" id="niu"
-            value="<?= isset(session()->get('data')['niu']) ? session()->get('data')['niu'] : '' ?>" minlength="10" required>
+            value="<?= isset(session()->get('data')['nomor_induk_user']) ? session()->get('data')['nomor_induk_user'] : '' ?>" minlength="10" required>
+    </div>
+    <div class="input-group mb-3">
+        <input type="email" class="form-control" placeholder="Email" name="email" id="email"
+            value="<?= isset(session()->get('data')['email_user']) ? session()->get('data')['email_user'] : '' ?>" minlength="10" required>
     </div>
     <div class="input-group mb-3">
         <input type="password" class="form-control" placeholder="Password" name="password" id="password" minlength="8" required>
@@ -47,13 +51,13 @@
         <select class="custom-select" name="jabatan" required>
             <option value="">--Silahkan Pilih--</option>
             <option value="1"
-                <?= (isset(session()->get('data')['jabatan']) && session()->get('data')['jabatan'] == 1) ? 'selected' : '' ?>>
+                <?= (isset(session()->get('data')['id_role']) && session()->get('data')['id_role'] == 1) ? 'selected' : '' ?>>
                 Tendik</option>
             <option value="2"
-                <?= (isset(session()->get('data')['jabatan']) && session()->get('data')['jabatan'] == 2) ? 'selected' : '' ?>>
+                <?= (isset(session()->get('data')['id_role']) && session()->get('data')['id_role'] == 2) ? 'selected' : '' ?>>
                 Dosen</option>
             <option value="3"
-                <?= (isset(session()->get('data')['jabatan']) && session()->get('data')['jabatan'] == 3) ? 'selected' : '' ?>>
+                <?= (isset(session()->get('data')['id_role']) && session()->get('data')['id_role'] == 3) ? 'selected' : '' ?>>
                 Mahasiswa</option>
         </select>
     </div>

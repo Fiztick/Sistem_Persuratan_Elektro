@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Controllers;
-use Ramsey\Uuid\Uuid;
 use App\Models\InboxModel;
 use App\Models\TipeModel;
 use App\Models\UserModel;
@@ -38,9 +36,11 @@ class Inbox extends BaseController
 
         // Create an associative array of user IDs and names
         $userNames = [];
+        $userEmails = [];
         $typeNames = [];
         foreach ($datas as $data) {
             $userNames[$data->id_user] = $data->nama_user;
+            $userEmails[$data->id_user] = $data->email_user;
             $typeNames[$data->tipe_inbox] = $data->nama_tipe;
         }
 
@@ -54,6 +54,7 @@ class Inbox extends BaseController
         // Assign the user names to the $inbox array
         foreach ($this->data['inbox'] as &$inboxItem) {
             $inboxItem['nama_user'] = $userNames[$inboxItem['id_user']] ?? '';
+            $inboxItem['email_user'] = $userEmails[$inboxItem['id_user']] ?? '';
             $inboxItem['nama_tipe'] = $typeNames[$inboxItem['tipe_inbox']] ?? '';
         }
 
@@ -235,9 +236,11 @@ class Inbox extends BaseController
 
         // Create an associative array of user IDs and names
         $userNames = [];
+        $userEmails = [];
         $typeNames = [];
         foreach ($datas as $data) {
             $userNames[$data->id_user] = $data->nama_user;
+            $userEmails[$data->id_user] = $data->email_user;
             $typeNames[$data->tipe_inbox] = $data->nama_tipe;
         }
 
@@ -251,6 +254,7 @@ class Inbox extends BaseController
         // Assign the user names to the $inbox array
         foreach ($this->data['inbox'] as &$inboxItem) {
             $inboxItem['nama_user'] = $userNames[$inboxItem['id_user']] ?? '';
+            $inboxItem['email_user'] = $userEmails[$inboxItem['id_user']] ?? '';
             $inboxItem['nama_tipe'] = $typeNames[$inboxItem['tipe_inbox']] ?? '';
         }
 

@@ -47,12 +47,27 @@
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
+                        <div class="row">
+                            <div class="col">
+                            </div>
+                            <div class="col-4 d-flex justify-content-end">
+                                <form action="<?= site_url('mailbox/search') ?>" class="form-inline" method="get">
+                                    <div class="form-group mr-2">
+                                        <input type="text" name="keyword" class="form-control" placeholder="Search..."
+                                            value="<?php empty($keyword) ? '' : $keyword; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
                                 <th>Kode Surat</th>
-                                <th>Judul Email</th>
-                                <th>Nama Pemohon</th>
+                                <th>Judul Surat</th>
+                                <th>Pemohon</th>
                                 <th>Tipe Pengajuan</th>
                                 <th>Deskripsi Pengajuan</th>
                                 <th>File</th>
@@ -67,10 +82,15 @@
                                 <td><?=$i++?></td>
                                 <td><?=$value['id_inbox']?></td>
                                 <td><?=$value['email_inbox']?></td>
-                                <td><?=$value['nama_user']?></td>
+                                <td><?=$value['nama_user']?> - <a href="mailto:<?=$value['email_user']?>?Subject=Some%20subject"><?=$value['email_user']?></a></td>
                                 <td><?=$value['nama_tipe']?></td>
                                 <td><?=$value['deskripsi_inbox']?></td>
-                                <td><?=$value['file_inbox']?></td>
+                                <?php if (!empty($value['file_inbox'])): ?>
+                                <td><a href="<?=site_url('download/'.$value['id_inbox'])?>"><i class="far fa-file fa-3x"
+                                            style="color: #7a7a7a"></i></a></td>
+                                <?php else: ?>
+                                <td>Tidak ada file yang diupload</td>
+                                <?php endif ?>
                                 <td><?=date('d/m/Y', strtotime($value['tanggal_inbox']))?></td>
                                 <td>
                                     <a href="#" class="fa fa-pencil-alt" data-toggle="modal"
@@ -83,7 +103,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                <button href="" class="btn btn-danger m-2" data-toggle="modal"
+                                    <button href="" class="btn btn-danger m-2" data-toggle="modal"
                                         data-target="#delete-modal<?=$value['id_inbox']?>">
                                         <i class="fas fa-trash"></i>
                                     </button>

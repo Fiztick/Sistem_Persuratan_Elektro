@@ -23,7 +23,7 @@ class Inbox extends Migration
             ],
             'file_inbox' => [
                 'type' => 'VARCHAR',
-                'constraint' => '35',
+                'constraint' => '50',
                 'null' => true,
             ],
             'status_inbox' => [

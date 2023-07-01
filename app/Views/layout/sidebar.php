@@ -27,7 +27,7 @@
         <li class="nav-item">
             <a href="<?= site_url('mailbox') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Semua Surat</p>
+                <p>Surat Selesai</p>
             </a>
         </li>
         <li class="nav-item">

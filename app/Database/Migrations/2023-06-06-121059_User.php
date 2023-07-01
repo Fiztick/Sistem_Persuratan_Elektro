@@ -22,7 +22,11 @@ class User extends Migration
             'nomor_induk_user' => [
                 'type' => 'INT',
                 'constraint' => '20',
-                'unique' => 'true',
+                'unique' => true,
+            ],
+            'email_user' => [
+                'type' => 'VARCHAR',
+                'constraint' => '255',
             ],
             'password_user' => [
                 'type' => 'VARCHAR',
