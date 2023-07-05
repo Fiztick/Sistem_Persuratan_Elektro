@@ -37,7 +37,6 @@
         border-bottom: 1px solid #fff !important;
     }
     </style>
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -135,9 +134,11 @@
     <script src="<?= base_url() ?>/template/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url() ?>/template/dist/js/adminlte.js"></script>
-
     <!-- DataTables  & Plugins -->
     <script src="<?= base_url() ?>/template/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- SPE JS -->
+    <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url() ?>/template/dist/js/spe.js"></script>
 </body>
 
 </html>

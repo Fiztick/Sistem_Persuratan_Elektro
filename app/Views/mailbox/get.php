@@ -46,22 +46,7 @@
                     Data Semua Surat
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <div class="row">
-                            <div class="col">
-                            </div>
-                            <div class="col-4 d-flex justify-content-end">
-                                <form action="<?= site_url('mailbox/search') ?>" class="form-inline" method="get">
-                                    <div class="form-group mr-2">
-                                        <input type="text" name="keyword" class="form-control" placeholder="Search..."
-                                            value="<?php empty($keyword) ? '' : $keyword; ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Search</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                    <table class="table table-bordered" id="myTable">
                         <thead>
                             <tr>
                                 <th style="width: 10px">#</th>
