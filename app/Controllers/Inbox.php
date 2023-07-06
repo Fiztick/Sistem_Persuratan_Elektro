@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\InboxModel;
 use App\Models\TipeModel;
 use App\Models\UserModel;
+use App\Models\StatusModel;
 use CodeIgniter\Files\File;
 
 class Inbox extends BaseController
@@ -14,15 +15,22 @@ class Inbox extends BaseController
         $this->inbox_model = new InboxModel();
         $this->tipe_model = new TipeModel();
         $this->user_model = new UserModel();
+        $this->status_model = new StatusModel();
     }
 
     public function index()
+    {
+        return view('inbox/get');
+    }
+
+    public function ajaxGetData()
     {
         $query = "status_inbox < 3";
 
         $builder = $this->inbox_model->builder();
         $builder->join('users', 'users.id_user = inbox.id_user');
         $builder->join('tipe', 'tipe.id_tipe = inbox.tipe_inbox');
+        $builder->join('status', 'status.id_status = inbox.status_inbox');
         $builder->where('status_inbox < 3');
         $datas = $builder->get()->getResult();
 
@@ -30,29 +38,25 @@ class Inbox extends BaseController
         $userNames = [];
         $userEmails = [];
         $typeNames = [];
+        $statusInbox = [];
         foreach ($datas as $data) {
             $userNames[$data->id_user] = $data->nama_user;
             $userEmails[$data->id_user] = $data->email_user;
             $typeNames[$data->tipe_inbox] = $data->nama_tipe;
+            $statusInbox[$data->status_inbox] = $data->nama_status;
         }
 
-        $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
-        $this->data['perPage'] = 15;
-        $this->data['total'] =  $this->inbox_model->where($query)->countAllResults();
-        $this->data['inbox'] = $this->inbox_model->where($query)->orderBy('tanggal_inbox', 'DESC')->paginate($this->data['perPage']);
-        $this->data['total_res'] = is_array($this->data['inbox'])? count($this->data['inbox']) : 0;
-        $this->data['pager'] = $this->inbox_model->pager;
+        $inboxData = $this->inbox_model->where($query)->orderBy('tanggal_inbox', 'DESC')->get()->getResult();
 
-        // $this->data['inbox'] = $this->inbox_model->where($query)->orderBy('tanggal_inbox', 'DESC');
-
-        // Assign the user names to the $inbox array
-        foreach ($this->data['inbox'] as &$inboxItem) {
-            $inboxItem['nama_user'] = $userNames[$inboxItem['id_user']] ?? '';
-            $inboxItem['email_user'] = $userEmails[$inboxItem['id_user']] ?? '';
-            $inboxItem['nama_tipe'] = $typeNames[$inboxItem['tipe_inbox']] ?? '';
+        // Assign the user names to the $inboxData array
+        foreach ($inboxData as &$inboxItem) {
+            $inboxItem->nama_user = $userNames[$inboxItem->id_user] ?? '';
+            $inboxItem->email_user = $userEmails[$inboxItem->id_user] ?? '';
+            $inboxItem->nama_tipe = $typeNames[$inboxItem->tipe_inbox] ?? '';
+            $inboxItem->nama_status = $statusInbox[$inboxItem->status_inbox] ?? '';
         }
 
-        return view('inbox/get', $this->data);
+        return $this->response->setJSON($inboxData);
     }
 
     public function update($id)

@@ -12,5 +12,5 @@ class TipeModel extends Model
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
     protected $protectFields    = true;
-    protected $allowedFields = ['id_tipe', 'nama_tipe'];
+    protected $allowedFields = [];
 }

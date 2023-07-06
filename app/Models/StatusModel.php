@@ -4,15 +4,16 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class RoleModel extends Model
+class StatusModel extends Model
 {
-    protected $DBGroup      = 'default';
-    protected $table      = 'roles';
-    protected $primaryKey = 'id_role';
-    protected $returnType     = 'array';
-    protected $useSoftDeletes = false;
+    protected $DBGroup          = 'default';
+    protected $table            = 'statuses';
+    protected $primaryKey       = 'id';
+    protected $useAutoIncrement = true;
+    protected $returnType       = 'array';
+    protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields = [];
+    protected $allowedFields    = [];
 
     // Dates
     protected $useTimestamps = false;
