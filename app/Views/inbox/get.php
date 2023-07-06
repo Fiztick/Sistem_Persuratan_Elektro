@@ -82,7 +82,7 @@
                                 <td><?=date('d/m/Y', strtotime($value['tanggal_inbox']))?></td>
                                 <td>
                                     <a href="#" class="fa fa-pencil-alt" data-toggle="modal"
-                                        data-target="#status-modal<?=$value['id_inbox']?>">
+                                        data-target="#status-modal<?=$value['id_inbox']?>" onclick="openModalEdit('<?=$value['id_inbox']?>', '<?=$value['nama_user']?>', '<?=$value['status_inbox']?>')">
                                         <?php
                                             // echo $value->status_inbox;
                                             $status_option = array('Pengajuan', 'Diproses', 'Diteruskan', 'Selesai Diambil di Jurusan', 'Selesai Diemail');
@@ -92,16 +92,22 @@
                                 </td>
                                 <td>
                                     <button href="" class="btn btn-danger m-2" data-toggle="modal"
-                                        data-target="#delete-modal<?=$value['id_inbox']?>">
+                                        data-target="#delete-modal" onclick="openModalDelete('<?=$value['id_inbox']?>')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
-                            <!-- Modal Update-->
-                            <form action="<?=site_url('inbox/'.$value['id_inbox'])?>" method="post">
+                            
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                    <!-- Modal Update-->
+                    <form method="post" id="formUpdate">
                                 <?= csrf_field() ?>
+                                <!-- <input type="hidden" name="id_inbox" id="id_inbox"> -->
                                 <input type="hidden" name="_method" value="PUT">
-                                <div class="modal fade" id="status-modal<?=$value['id_inbox']?>" tabindex="-1"
+                                <div class="modal fade" id="status-modal" tabindex="-1"
                                     role="dialog" aria-labelledby="status-modalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -116,19 +122,15 @@
                                             <div class="modal-body">
                                                 <div class="form-group">
                                                     <label>Dari Pemohon: </label>
-                                                    <p><?=$value['nama_user']?></p>
+                                                    <p id="nama_user"></p>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="status_inbox">Status Baru: </label>
                                                     <select class="custom-select" aria-label="Default select example"
-                                                        name="status_inbox">
+                                                        name="status_inbox" id="status_inbox">
                                                         <?php 
                                                         foreach($status_option as $key => $opsi) :
-                                                            if($key == $value['status_inbox']) {
-                                                                echo "<option selected value='".$key."'>".$opsi."</option>";
-                                                            } else {
-                                                                echo "<option value='".$key."'>".$opsi."</option>";
-                                                            }
+                                                            echo "<option value='".$key."'>".$opsi."</option>";
                                                         endforeach;
                                                         ?>
                                                     </select>
@@ -146,10 +148,11 @@
                             <!-- end Modal Update -->
 
                             <!-- Modal Delete-->
-                            <form action="<?=site_url('inbox/'.$value['id_inbox'])?>" method="post">
+                            <form method="post" id="formDelete">
                                 <?= csrf_field() ?>
+                                <input type="hidden" name="id_inbox" id="id_inbox">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <div class="modal fade" id="delete-modal<?=$value['id_inbox']?>" tabindex="-1"
+                                <div class="modal fade" id="delete-modal" tabindex="-1"
                                     role="dialog" aria-labelledby="delete-modalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -176,14 +179,33 @@
                                 </div>
                             </form>
                             <!-- end Modal Delete -->
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
                 </div>
                 <!-- end using data table -->
             </div>
         </div><!-- /.container-fluid -->
     </section>
 </div>
+
+<script type="text/javascript">
+    function openModalEdit(id, nama, status) {
+        // alert(id + nama + status)
+        $('#status-modal').modal('show')
+        var url = <?php echo json_encode(site_url('inbox/')); ?> + id
+        
+        $('#formUpdate').attr('action', url)
+        // $('#id_inbox').attr('value', id)
+        $('#nama_user').text(nama)
+        $('#status_inbox').val(status)
+    }
+
+    function openModalDelete(id) {
+        // alert(id)
+        $('#delete-modal').modal('show')
+        var url = <?php echo json_encode(site_url('inbox/')); ?> + id
+
+        $('#formDelete').attr('action', url)
+        // $('#id_inbox').attr('value', id)
+    }
+</script>
 
 <?= $this->endSection() ?>
