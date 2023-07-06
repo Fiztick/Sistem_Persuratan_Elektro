@@ -94,6 +94,7 @@ class Inbox extends BaseController
         $data['tipe'] = $this->tipe_model->findAll();
 
         return view('inbox/add', $data);
+        return json_encode($data);
     }
 
     public function store()
