@@ -89,9 +89,34 @@ class BaseSeeder extends Seeder
             ],
         ];
 
+        $status = [
+            [
+                'id_status' => '0',
+                'nama_status' => 'Pengajuan',
+            ],
+            [
+                'id_status' => '1',
+                'nama_status' => 'Diproses',
+            ],
+            [
+                'id_status' => '2',
+                'nama_status' => 'Diteruskan',
+            ],
+            [
+                'id_status' => '3',
+                'nama_status' => 'Selesai Diambil di Jurusan',
+            ],
+            [
+                'id_status' => '4',
+                'nama_status' => 'Selesai Diemail',
+            ],
+        ]; 
+
         $this->db->table('roles')->insertBatch($role);
         $this->db->table('users')->insertBatch($user);
         $this->db->table('tipe')->insertBatch($tipe);
+        $this->db->table('status')->insertBatch($status);
+
 
         //php spark db:seed BaseSeeder
     }

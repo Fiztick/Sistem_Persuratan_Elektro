@@ -7,7 +7,7 @@ use App\Models\InboxModel;
 use App\Models\TipeModel;
 use App\Models\UserModel;
 
-class Status extends BaseController
+class Status_Surat_User extends BaseController
 {
     public function __construct()
     {

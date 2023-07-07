@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\InboxModel;
 use App\Models\TipeModel;
 use App\Models\UserModel;
+use App\Models\StatusModel;
 use CodeIgniter\Files\File;
 
 class Mailbox extends BaseController
@@ -12,12 +13,10 @@ class Mailbox extends BaseController
 
     public function __construct()
     {
-        // $this->request = \Config\Services::request();
-        // $this->session = session();
         $this->mailbox_model = new InboxModel;
         $this->tipe_model = new TipeModel();
         $this->user_model = new UserModel();
-        // $this->data = ['session' => $this->session,'request'=>$this->request];
+        $this->status_model = new StatusModel();
     }
 
     public function index()
@@ -27,31 +26,32 @@ class Mailbox extends BaseController
         $builder = $this->mailbox_model->builder();
         $builder->join('users', 'users.id_user = inbox.id_user');
         $builder->join('tipe', 'tipe.id_tipe = inbox.tipe_inbox');
+        $builder->join('status', 'status.id_status = inbox.status_inbox');
+        $builder->where($query);
         $datas = $builder->get()->getResult();
 
-        $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
-        $this->data['perPage'] =  10;
-        $this->data['total'] =  $this->mailbox_model->where($query)->countAllResults();
-        $this->data['mailbox'] = $this->mailbox_model->where($query)->orderBy('tanggal_inbox', 'DESC')->paginate($this->data['perPage']);
-        $this->data['total_res'] = is_array($this->data['mailbox'])? count($this->data['mailbox']) : 0;
-        $this->data['pager'] = $this->mailbox_model->pager;
+        // // Create an associative array of user IDs and names
+        // $userNames = [];
+        // $userEmails = [];
+        // $typeNames = [];
+        // $statusInbox = [];
+        // foreach ($datas as $data) {
+        //     $userNames[$data->id_user] = $data->nama_user;
+        //     $userEmails[$data->id_user] = $data->email_user;
+        //     $typeNames[$data->tipe_inbox] = $data->nama_tipe;
+        //     $statusInbox[$data->status_inbox] = $data->nama_status;
+        // }
 
-        // Create an associative array of user IDs and names
-        $userNames = [];
-        $userEmails = [];
-        $typeNames = [];
-        foreach ($datas as $data) {
-            $userNames[$data->id_user] = $data->nama_user;
-            $userEmails[$data->id_user] = $data->email_user;
-            $typeNames[$data->tipe_inbox] = $data->nama_tipe;
-        }
+        $this->data['status'] = $this->status_model->get()->getResult();
+        $this->data['mailbox'] = $datas;
 
-        // Assign the user names to the $inbox array
-        foreach ($this->data['mailbox'] as &$inboxItem) {
-            $inboxItem['nama_user'] = $userNames[$inboxItem['id_user']] ?? '';
-            $inboxItem['email_user'] = $userEmails[$inboxItem['id_user']] ?? '';
-            $inboxItem['nama_tipe'] = $typeNames[$inboxItem['tipe_inbox']] ?? '';
-        }
+        // // Assign the user names to the $inbox array
+        // foreach ($this->data['mailbox'] as &$inboxItem) {
+        //     $inboxItem->nama_user = $userNames[$inboxItem->id_user] ?? '';
+        //     $inboxItem->email_user = $userEmails[$inboxItem->id_user] ?? '';
+        //     $inboxItem->nama_tipe = $typeNames[$inboxItem->tipe_inbox] ?? '';
+        //     $inboxItem->nama_status = $statusInbox[$inboxItem->status_inbox] ?? '';
+        // }
 
         return view('mailbox/get', $this->data);
     }

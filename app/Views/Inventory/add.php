@@ -69,7 +69,7 @@
                         </div>
                         <div class="form-group">
                             <label>Tanggal Terima</label>
-                            <input type="date" name="tanggal_terima_surat" class="form-control" required autofocus>
+                            <input type="date" name="tanggal_terima_surat" value="<?=date('Y-m-d')?>" class="form-control" required autofocus>
                         </div>
                         <div class="form-group">
                             <label>Asal Surat</label>

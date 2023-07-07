@@ -14,12 +14,11 @@ class User extends BaseController
 
     public function index()
     {        
-        $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
-        $this->data['perPage'] =  10;
-        $this->data['total'] =  $this->user_model->countAllResults();
-        $this->data['users'] = $this->user_model->paginate($this->data['perPage']);
-        $this->data['total_res'] = is_array($this->data['users'])? count($this->data['users']) : 0;
-        $this->data['pager'] = $this->user_model->pager;
+        $builder = $this->user_model->builder();
+        $builder->join('roles', 'roles.id_role = users.id_role');
+        $datas = $builder->get()->getResult();
+
+        $this->data['users'] = $datas;
 
         return view('users/get', $this->data);
     }

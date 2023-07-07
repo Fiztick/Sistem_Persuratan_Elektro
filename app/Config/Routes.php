@@ -72,7 +72,7 @@ $routes->get('download/(:any)', 'Inbox::download/$1');
 $routes->get('settings', 'Settings::index');
 $routes->put('settings/(:any)', 'Settings::update/$1');
 
-$routes->get('lihat-status', 'Status::index');
+$routes->get('lihat-status', 'Status_Surat_User::index');
 
 $routes->get('pencarian-surat', 'Status_Surat::index');
 $routes->post('status-surat', 'Status_Surat::getSurat');

@@ -7,21 +7,13 @@ class Inventory extends BaseController
 {
     public function __construct()
     {
-        // $this->request = \Config\Services::request();
-        // $this->session = session();
         $this->inventory_model = new InventoryModel;
-        // $this->data = ['session' => $this->session,'request'=>$this->request];
     }
 
     public function index()
     {        
-        $this->data['page'] =  !empty($this->request->getVar('page')) ? $this->request->getVar('page') : 1;
-        $this->data['perPage'] =  10;
-        $this->data['total'] =  $this->inventory_model->countAllResults();
-        $this->data['inventory'] = $this->inventory_model->paginate($this->data['perPage']);
-        $this->data['total_res'] = is_array($this->data['inventory'])? count($this->data['inventory']) : 0;
-        $this->data['pager'] = $this->inventory_model->pager;
-
+        $this->data['inventory'] = $this->inventory_model->get()->getResult();
+        
         return view('inventory/get', $this->data);
     }
 

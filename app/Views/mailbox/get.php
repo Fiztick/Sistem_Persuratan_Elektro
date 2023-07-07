@@ -49,138 +49,131 @@
                     <table class="table table-bordered" id="myTable">
                         <thead>
                             <tr>
-                                <th style="width: 10px">#</th>
-                                <th>Kode Surat</th>
-                                <th>Judul Surat</th>
-                                <th>Pemohon</th>
-                                <th>Tipe Pengajuan</th>
-                                <th>Deskripsi Pengajuan</th>
-                                <th>File</th>
-                                <th>Tanggal Surat Masuk</th>
-                                <th>Status Pengajuan</th>
-                                <th>Action</th>
+                                <th class="align-middle" style="width: 10px">#</th>
+                                <th class="align-middle">Kode Surat</th>
+                                <th class="align-middle">Judul Surat</th>
+                                <th class="align-middle">Pemohon</th>
+                                <th class="align-middle">Tipe Pengajuan</th>
+                                <th class="align-middle">Deskripsi Pengajuan</th>
+                                <th class="align-middle">File</th>
+                                <th class="align-middle">Tanggal Surat Masuk</th>
+                                <th class="align-middle">Status Pengajuan</th>
+                                <th class="align-middle">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i=1; foreach ($mailbox as $value) : ?>
                             <tr>
-                                <td><?=$i++?></td>
-                                <td><?=$value['id_inbox']?></td>
-                                <td><?=$value['email_inbox']?></td>
-                                <td><?=$value['nama_user']?> - <a href="mailto:<?=$value['email_user']?>?Subject=Some%20subject"><?=$value['email_user']?></a></td>
-                                <td><?=$value['nama_tipe']?></td>
-                                <td><?=$value['deskripsi_inbox']?></td>
-                                <?php if (!empty($value['file_inbox'])): ?>
-                                <td><a href="<?=site_url('download/'.$value['id_inbox'])?>"><i class="far fa-file fa-3x"
+                                <td class="align-middle"><?=$i++?></td>
+                                <td class="align-middle"><?=$value->id_inbox?></td>
+                                <td class="align-middle"><?=$value->email_inbox?></td>
+                                <td class="align-middle"><?=$value->nama_user?> - <a
+                                        href="mailto:<?=$value->email_user?>?Subject=Some%20subject"><?=$value->email_user?></a>
+                                </td>
+                                <td class="align-middle"><?=$value->nama_tipe?></td>
+                                <td class="align-middle"><?=$value->deskripsi_inbox?></td>
+                                <?php if (!empty($value->file_inbox)): ?>
+                                <td class="align-middle"><a href="<?=site_url('download/'.$value->id_inbox)?>"><i class="far fa-file fa-3x"
                                             style="color: #7a7a7a"></i></a></td>
                                 <?php else: ?>
-                                <td>Tidak ada file yang diupload</td>
+                                <td class="align-middle">Tidak ada file yang diupload</td>
                                 <?php endif ?>
-                                <td><?=date('d/m/Y', strtotime($value['tanggal_inbox']))?></td>
-                                <td>
+                                <td class="align-middle"><?=date('d/m/Y', strtotime($value->tanggal_inbox))?></td>
+                                <td class="align-middle">
                                     <a href="#" class="fa fa-pencil-alt" data-toggle="modal"
-                                        data-target="#status-modal<?=$value['id_inbox']?>">
+                                        onclick="openModalEdit('<?=$value->id_inbox?>', '<?=$value->nama_user?>', '<?=$value->status_inbox?>', 1)">
                                         <?php
-                                            // echo $value->status_inbox;
-                                            $status_option = array('Pengajuan', 'Diproses', 'Diteruskan', 'Selesai Diambil di Jurusan', 'Selesai Diemail');
-                                            echo $status_option[$value['status_inbox']];
+                                            echo $value->nama_status;
                                         ?>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <button href="" class="btn btn-danger m-2" data-toggle="modal"
-                                        data-target="#delete-modal<?=$value['id_inbox']?>">
+                                        onclick="openModalDelete('<?=$value->id_inbox?>', 1)">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
 
-                            <!-- Modal Update-->
-                            <form action="<?=site_url('mailbox/'.$value['id_inbox'])?>" method="post">
-                                <?= csrf_field() ?>
-                                <input type="hidden" name="_method" value="PUT">
-                                <div class="modal fade" id="status-modal<?=$value['id_inbox']?>" tabindex="-1"
-                                    role="dialog" aria-labelledby="status-modalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="status-modalLabel">Ubah Status Pengajuan
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label>Dari Pemohon: </label>
-                                                    <p><?= $value['nama_user'] ?></p>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="status_inbox">Status Baru: </label>
-                                                    <select class="custom-select" aria-label="Default select example"
-                                                        name="status_inbox">
-                                                        <?php 
-                                                        foreach($status_option as $key => $opsi) :
-                                                            if($key == $value['status_inbox']) {
-                                                                echo "<option selected value='".$key."'>".$opsi."</option>";
-                                                            } else {
-                                                                echo "<option value='".$key."'>".$opsi."</option>";
-                                                            }
-                                                        endforeach;
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- end Modal Update -->
 
-                            <!-- Modal Delete-->
-                            <form action="<?=site_url('mailbox/'.$value['id_inbox'])?>" method="post">
-                                <?= csrf_field() ?>
-                                <input type="hidden" name="_method" value="DELETE">
-                                <div class="modal fade" id="delete-modal<?=$value['id_inbox']?>" tabindex="-1"
-                                    role="dialog" aria-labelledby="delete-modalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="delete-modalLabel">Hapus Pengajuan
-                                                </h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label>Dari Pemohon: </label>
-                                                    <p><?= $value['nama_user'] ?></p>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <!-- end Modal Delete -->
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <div class="mt-3">
-                        <?= $pager->makeLinks($page, $perPage, $total, 'custom_view') ?>
-                    </div>
+
+                    <!-- Modal Update-->
+                    <form method="post" id="formUpdate">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="modal fade" id="status-modal" tabindex="-1" role="dialog"
+                            aria-labelledby="status-modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="status-modalLabel">Ubah Status Pengajuan
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label>Dari Pemohon: </label>
+                                            <p id="nama_user"></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="status_inbox">Status Baru: </label>
+                                            <select class="custom-select" aria-label="Default select example"
+                                                name="status_inbox" id="status">
+                                                <?php 
+                                                    foreach($status as $value) :
+                                                        echo "<option value='".$value->id_status."'>".$value->nama_status."</option>";
+                                                    endforeach;
+                                                ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- end Modal Update -->
+
+                    <!-- Modal Delete-->
+                    <!-- Modal Delete-->
+                    <form method="post" id="formDelete">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="DELETE">
+                        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog"
+                            aria-labelledby="delete-modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="delete-modalLabel">Hapus Pengajuan
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <p>Apakah Anda Yakin?</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- end Modal Delete -->
                 </div>
             </div>
 
