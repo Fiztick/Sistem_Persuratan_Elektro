@@ -45,51 +45,54 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered" id="myTable">
-                        <thead>
-                            <tr>
-                                <th class="align-middle" style="width: 10px">#</th>
-                                <th class="align-middle">No Surat</th>
-                                <th class="align-middle">Kode Surat</th>
-                                <th class="align-middle">Perihal</th>
-                                <th class="align-middle">Tanggal Surat</th>
-                                <th class="align-middle">Tanggal Terima</th>
-                                <th class="align-middle">Asal Surat</th>
-                                <th class="align-middle">Tindak Lanjut</th>
-                                <th class="align-middle">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i=1; foreach ($inventory as $value) : ?>
-                            <tr>
-                                <td class="align-middle"><?=$i++?></td>
-                                <td class="align-middle"><?=$value->no_surat?></td>
-                                <td class="align-middle"><?=$value->kode_surat?></td>
-                                <td class="align-middle"><?=$value->perihal_surat?></td>
-                                <td class="align-middle"><?=date('d/m/Y', strtotime($value->tanggal_surat))?></td>
-                                <td class="align-middle"><?=date('d/m/Y', strtotime($value->tanggal_terima_surat))?></td>
-                                <td class="align-middle"><?=$value->asal_surat?></td>
-                                <td class="align-middle">
-                                    <?php
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle" style="width: 10px">#</th>
+                                    <th class="align-middle">No Surat</th>
+                                    <th class="align-middle">Kode Surat</th>
+                                    <th class="align-middle">Perihal</th>
+                                    <th class="align-middle">Tanggal Surat</th>
+                                    <th class="align-middle">Tanggal Terima</th>
+                                    <th class="align-middle">Asal Surat</th>
+                                    <th class="align-middle">Tindak Lanjut</th>
+                                    <th class="align-middle">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i=1; foreach ($inventory as $value) : ?>
+                                <tr>
+                                    <td class="align-middle"><?=$i++?></td>
+                                    <td class="align-middle"><?=$value->no_surat?></td>
+                                    <td class="align-middle"><?=$value->kode_surat?></td>
+                                    <td class="align-middle"><?=$value->perihal_surat?></td>
+                                    <td class="align-middle"><?=date('d/m/Y', strtotime($value->tanggal_surat))?></td>
+                                    <td class="align-middle"><?=date('d/m/Y', strtotime($value->tanggal_terima_surat))?>
+                                    </td>
+                                    <td class="align-middle"><?=$value->asal_surat?></td>
+                                    <td class="align-middle">
+                                        <?php
                                         $tindak_lanjut = array('Arsip', 'Diteruskan');
                                         echo $tindak_lanjut[$value->tindak_lanjut]
                                     ?>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="<?=site_url('inventory/edit/'.$value->id_inventory)?>"
-                                        class="btn btn-primary m-2">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                    <button href="" class="btn btn-danger m-2" data-toggle="modal"
-                                        onclick="openModalDelete('<?=$value->id_inventory?>', 2)">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="<?=site_url('inventory/edit/'.$value->id_inventory)?>"
+                                            class="btn btn-primary m-2">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <button href="" class="btn btn-danger m-2" data-toggle="modal"
+                                            onclick="openModalDelete('<?=$value->id_inventory?>', 2)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Modal Delete-->
                     <form method="post" id="formDelete">
@@ -100,7 +103,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="delete-modalLabel">Hapus Pengajuan
+                                        <h5 class="modal-title" id="delete-modalLabel">Hapus Surat
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>

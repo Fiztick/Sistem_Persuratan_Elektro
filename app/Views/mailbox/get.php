@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default') ?>
 
 <?= $this->section('title') ?>
-<title>Data Semua Surat &mdash; Sistem Persuratan Elektro</title>
+<title>Data Surat Selesai &mdash; Sistem Persuratan Elektro</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -46,59 +46,59 @@
                     Data Semua Surat
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered" id="myTable">
-                        <thead>
-                            <tr>
-                                <th class="align-middle" style="width: 10px">#</th>
-                                <th class="align-middle">Kode Surat</th>
-                                <th class="align-middle">Judul Surat</th>
-                                <th class="align-middle">Pemohon</th>
-                                <th class="align-middle">Tipe Pengajuan</th>
-                                <th class="align-middle">Deskripsi Pengajuan</th>
-                                <th class="align-middle">File</th>
-                                <th class="align-middle">Tanggal Surat Masuk</th>
-                                <th class="align-middle">Status Pengajuan</th>
-                                <th class="align-middle">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i=1; foreach ($mailbox as $value) : ?>
-                            <tr>
-                                <td class="align-middle"><?=$i++?></td>
-                                <td class="align-middle"><?=$value->id_inbox?></td>
-                                <td class="align-middle"><?=$value->email_inbox?></td>
-                                <td class="align-middle"><?=$value->nama_user?> - <a
-                                        href="mailto:<?=$value->email_user?>?Subject=Some%20subject"><?=$value->email_user?></a>
-                                </td>
-                                <td class="align-middle"><?=$value->nama_tipe?></td>
-                                <td class="align-middle"><?=$value->deskripsi_inbox?></td>
-                                <?php if (!empty($value->file_inbox)): ?>
-                                <td class="align-middle"><a href="<?=site_url('download/'.$value->id_inbox)?>"><i class="far fa-file fa-3x"
-                                            style="color: #7a7a7a"></i></a></td>
-                                <?php else: ?>
-                                <td class="align-middle">Tidak ada file yang diupload</td>
-                                <?php endif ?>
-                                <td class="align-middle"><?=date('d/m/Y', strtotime($value->tanggal_inbox))?></td>
-                                <td class="align-middle">
-                                    <a href="#" class="fa fa-pencil-alt" data-toggle="modal"
-                                        onclick="openModalEdit('<?=$value->id_inbox?>', '<?=$value->nama_user?>', '<?=$value->status_inbox?>', 1)">
-                                        <?php
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle" style="width: 10px">#</th>
+                                    <th class="align-middle">Kode Surat</th>
+                                    <th class="align-middle">Judul Surat</th>
+                                    <th class="align-middle">Pemohon</th>
+                                    <th class="align-middle">Tipe Pengajuan</th>
+                                    <th class="align-middle">Deskripsi Pengajuan</th>
+                                    <th class="align-middle">File</th>
+                                    <th class="align-middle">Tanggal Surat Masuk</th>
+                                    <th class="align-middle">Status Pengajuan</th>
+                                    <th class="align-middle">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i=1; foreach ($mailbox as $value) : ?>
+                                <tr>
+                                    <td class="align-middle"><?=$i++?></td>
+                                    <td class="align-middle"><?=$value->id_inbox?></td>
+                                    <td class="align-middle"><?=$value->email_inbox?></td>
+                                    <td class="align-middle"><?=$value->nama_user?> - <a
+                                            href="mailto:<?=$value->email_user?>?Subject=Some%20subject"><?=$value->email_user?></a>
+                                    </td>
+                                    <td class="align-middle"><?=$value->nama_tipe?></td>
+                                    <td class="align-middle"><?=$value->deskripsi_inbox?></td>
+                                    <?php if (!empty($value->file_inbox)): ?>
+                                    <td class="align-middle"><a href="<?=site_url('download/'.$value->id_inbox)?>"><i
+                                                class="far fa-file fa-3x" style="color: #7a7a7a"></i></a></td>
+                                    <?php else: ?>
+                                    <td class="align-middle">Tidak ada file yang diupload</td>
+                                    <?php endif ?>
+                                    <td class="align-middle"><?=date('d/m/Y', strtotime($value->tanggal_inbox))?></td>
+                                    <td class="align-middle">
+                                        <a href="#" class="fa fa-pencil-alt" data-toggle="modal"
+                                            onclick="openModalEdit('<?=$value->id_inbox?>', '<?=$value->nama_user?>', '<?=$value->status_inbox?>', 1)">
+                                            <?php
                                             echo $value->nama_status;
                                         ?>
-                                    </a>
-                                </td>
-                                <td class="align-middle">
-                                    <button href="" class="btn btn-danger m-2" data-toggle="modal"
-                                        onclick="openModalDelete('<?=$value->id_inbox?>', 1)">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-
-
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle">
+                                        <button href="" class="btn btn-danger m-2" data-toggle="modal"
+                                            onclick="openModalDelete('<?=$value->id_inbox?>', 1)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Modal Update-->
                     <form method="post" id="formUpdate">

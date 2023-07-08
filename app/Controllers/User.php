@@ -40,6 +40,7 @@ class User extends BaseController
             $data = [
                 'nama_user' => $this->request->getVar('nama_user'),
                 'nomor_induk_user' => $niu,
+                'email_user' => $this->request->getVar('email_user'),
                 'password_user' => password_hash($this->request->getVar('nomor_induk_user'), PASSWORD_BCRYPT),
                 'id_role' => $this->request->getVar('id_role'),
             ];

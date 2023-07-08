@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default') ?>
 
 <?= $this->section('title') ?>
-<title>Login &mdash; Sistem Persuratan Elektro</title>
+<title>Tambah Arsip &mdash; Sistem Persuratan Elektro</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>

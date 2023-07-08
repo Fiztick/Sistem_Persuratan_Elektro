@@ -18,8 +18,6 @@
         href="<?= base_url() ?>/template/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?= base_url() ?>/template/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="<?= base_url() ?>/template/plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= base_url() ?>/template/dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -113,13 +111,8 @@
     </script>
     <!-- Bootstrap 4 -->
     <script src="<?= base_url() ?>/template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="<?= base_url() ?>/template/plugins/chart.js/Chart.min.js"></script>
     <!-- Sparkline -->
     <script src="<?= base_url() ?>/template/plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <!-- <script src="<?= base_url() ?>/template/plugins/jqvmap/jquery.vmap.min.js"></script> -->
-    <!-- <script src="<?= base_url() ?>/template/plugins/jqvmap/maps/jquery.vmap.usa.js"></script> -->
     <!-- jQuery Knob Chart -->
     <script src="<?= base_url() ?>/template/plugins/jquery-knob/jquery.knob.min.js"></script>
     <!-- daterangepicker -->
@@ -134,9 +127,7 @@
     <script src="<?= base_url() ?>/template/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url() ?>/template/dist/js/adminlte.js"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="<?= base_url() ?>/template/plugins/datatables/jquery.dataTables.min.js"></script>
-    <!-- SPE JS -->
+    <!-- CCustom JS -->
     <script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script src="<?= base_url() ?>/template/dist/js/spe.js"></script>
 </body>

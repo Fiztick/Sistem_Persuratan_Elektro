@@ -60,12 +60,17 @@
                                 class="form-control" required autofocus disabled>
                         </div>
                         <div class="form-group">
+                            <label>Email User</label>
+                            <input type="text" value="<?=$user['email_user']?>"
+                                class="form-control" required autofocus disabled>
+                        </div>
+                        <div class="form-group">
                             <label>Password Baru</label>
-                            <input type="password" name="password_user" class="form-control" autofocus>
+                            <input type="password" name="password_user" class="form-control" required autofocus>
                         </div>
                         <div class="form-group">
                             <label>Confirm Password Baru</label>
-                            <input type="password" name="c_password_user" class="form-control" autofocus>
+                            <input type="password" name="c_password_user" class="form-control" required autofocus>
                         </div>
                         <div class="form-group">
                             <label>Jabatan User</label>

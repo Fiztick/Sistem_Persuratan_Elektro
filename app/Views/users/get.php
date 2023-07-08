@@ -46,49 +46,54 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered" id="myTable">
-                        <thead>
-                            <tr>
-                                <th class="align-middle" style="width: 10px">#</th>
-                                <th class="align-middle">Nama User</th>
-                                <th class="align-middle">NIP/NIM</th>
-                                <th class="align-middle">Jabatan</th>
-                                <th class="align-middle">Status</th>
-                                <th class="align-middle">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i=1; foreach ($users as $value) : ?>
-                            <tr>
-                                <td class="align-middle"><?=$i++?></td>
-                                <td class="align-middle"><?=$value->nama_user?></td>
-                                <td class="align-middle"><?=$value->nomor_induk_user?></td>
-                                <td class="align-middle"><?=$value->nama_role?></td>
-                                <td class="align-middle">
-                                    <button href="#" data-toggle="modal" <?php if($value->status_user == 0) : ?>
-                                        class="fa fa-pencil-alt btn-outline-secondary p-2"
-                                        <?php elseif($value->status_user == 1) : ?>
-                                        class="fa fa-pencil-alt btn-outline-success p-2" <?php endif ?>
-                                        onclick="openModalEdit('<?=$value->id_user?>', '', '<?=$value->status_user?>', 2, false)">
-                                        <?php
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="myTable">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle" style="width: 10px">#</th>
+                                    <th class="align-middle">Nama User</th>
+                                    <th class="align-middle">NIP/NIM</th>
+                                    <th class="align-middle">Email</th>
+                                    <th class="align-middle">Jabatan</th>
+                                    <th class="align-middle">Status</th>
+                                    <th class="align-middle">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i=1; foreach ($users as $value) : ?>
+                                <tr>
+                                    <td class="align-middle"><?=$i++?></td>
+                                    <td class="align-middle"><?=$value->nama_user?></td>
+                                    <td class="align-middle"><?=$value->nomor_induk_user?></td>
+                                    <td class="align-middle"><?=$value->email_user?></td>
+                                    <td class="align-middle"><?=$value->nama_role?></td>
+                                    <td class="align-middle">
+                                        <button href="#" data-toggle="modal" <?php if($value->status_user == 0) : ?>
+                                            class="fa fa-pencil-alt btn-outline-secondary p-2"
+                                            <?php elseif($value->status_user == 1) : ?>
+                                            class="fa fa-pencil-alt btn-outline-success p-2" <?php endif ?>
+                                            onclick="openModalEdit('<?=$value->id_user?>', '', '<?=$value->status_user?>', 2, false)">
+                                            <?php
                                             $status_user = array('Nonaktif', 'Aktif');
                                             echo $status_user[$value->status_user];
                                         ?>
-                                    </button>
-                                </td>
-                                <td class="align-middle">
-                                    <a href="<?=site_url('user/edit/'.$value->id_user)?>" class="btn btn-primary m-2">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
-                                    <button href="" class="btn btn-danger m-2" data-toggle="modal"
-                                    onclick="openModalDelete('<?=$value->id_user?>', 3)">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                        </button>
+                                    </td>
+                                    <td class="align-middle">
+                                        <a href="<?=site_url('user/edit/'.$value->id_user)?>"
+                                            class="btn btn-primary m-2">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </a>
+                                        <button href="" class="btn btn-danger m-2" data-toggle="modal"
+                                            onclick="openModalDelete('<?=$value->id_user?>', 3)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
 
                     <!-- Modal Update Status User-->
                     <form method="post" id="formUpdate">
@@ -138,7 +143,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="delete-modalLabel">Hapus Pengajuan
+                                        <h5 class="modal-title" id="delete-modalLabel">Hapus User
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>

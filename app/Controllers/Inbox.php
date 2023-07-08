@@ -30,28 +30,8 @@ class Inbox extends BaseController
         $builder->orderBy('tanggal_inbox', 'DESC');
         $datas = $builder->get()->getResult();
 
-        // // Create an associative array of user IDs and names
-        // $userNames = [];
-        // $userEmails = [];
-        // $typeNames = [];
-        // $statusInbox = [];
-        // foreach ($datas as $data) {
-        //     $userNames[$data->id_user] = $data->nama_user;
-        //     $userEmails[$data->id_user] = $data->email_user;
-        //     $typeNames[$data->tipe_inbox] = $data->nama_tipe;
-        //     $statusInbox[$data->status_inbox] = $data->nama_status;
-        // }
-
         $this->data['status'] = $this->status_model->get()->getResult();
         $this->data['inbox'] = $datas;
-
-        // // Assign the user names to the $inbox array
-        // foreach ($this->data['inbox'] as &$inboxItem) {
-        //     $inboxItem->nama_user = $userNames[$inboxItem->id_user] ?? '';
-        //     $inboxItem->email_user = $userEmails[$inboxItem->id_user] ?? '';
-        //     $inboxItem->nama_tipe = $typeNames[$inboxItem->tipe_inbox] ?? '';
-        //     $inboxItem->nama_status = $statusInbox[$inboxItem->status_inbox] ?? '';
-        // }
 
         return view('inbox/get', $this->data);
     }

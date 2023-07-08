@@ -30,6 +30,16 @@ class Settings extends BaseController
 
     public function update($id)
     {
+        $rules = [
+            'password_user' => 'required|min_length[8]',
+            'c_password_user' => 'required|min_length[8]',
+        ];
+
+        if (! $this->validate($rules)) {
+            $validation = \Config\Services::validation();
+            return redirect()->to(site_url('settings'))->withInput()->with('error', $validation->listErrors());
+        }
+
         $c_password = $this->request->getVar('c_password_user');
         $password = $this->request->getVar('password_user');
 

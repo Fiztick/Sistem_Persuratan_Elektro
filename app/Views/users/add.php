@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default') ?>
 
 <?= $this->section('title') ?>
-<title>Create User &mdash; Sistem Persuratan Elektro</title>
+<title>Tambah User &mdash; Sistem Persuratan Elektro</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -58,6 +58,10 @@
                         <div class="form-group">
                             <label>Nomor Induk User</label>
                             <input type="number" name="nomor_induk_user" class="form-control" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label>Email User</label>
+                            <input type="email" name="email_user" class="form-control" required autofocus>
                         </div>
                         <div class="form-group">
                             <label>Jabatan User</label>
