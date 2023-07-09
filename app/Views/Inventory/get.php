@@ -83,7 +83,7 @@
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <button href="" class="btn btn-danger m-2" data-toggle="modal"
-                                            onclick="openModalDelete('<?=$value->id_inventory?>', 2)">
+                                            onclick="openModalDelete('<?=$value->id_inventory?>', 4)">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                         </form>

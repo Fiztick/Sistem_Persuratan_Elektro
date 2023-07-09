@@ -10,6 +10,8 @@ function generateControllerURL(controller) {
         return controller = base_url + '/user/updateStatus/'
     } else if (controller == 3) {
         return controller = base_url + '/user/'
+    } else if (controller == 4) {
+        return controller = base_url + '/inventory/'
     }
 }
 
