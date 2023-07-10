@@ -43,7 +43,7 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    Data Surat Masuk
+                    Data Surat Pengajuan
                 </div>
                 <!-- Using DataTable -->
                 <div class="card-body">

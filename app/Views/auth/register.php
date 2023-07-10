@@ -66,12 +66,11 @@
         <button type="submit" class="btn btn-primary btn-block">Register</button>
     </div>
 </form>
+<!-- <div class="mb-3">
+    <a href="<?=site_url('pencarian-surat')?>" class="btn btn-primary btn-block">Progres Pengajuan Surat</a>
+</div> -->
 <p class="mb-0">
     Sudah punya akun?
     <a href="<?=site_url()?>" class="text-center">Login</a>
-</p>
-<p class="mb-0">
-    Sudah punya kode surat?
-    <a href="<?=site_url('pencarian-surat')?>" class="text-center">Cari Kode Surat</a>
 </p>
 <?= $this->endSection() ?>

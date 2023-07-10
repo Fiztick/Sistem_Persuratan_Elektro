@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default') ?>
 
 <?= $this->section('title') ?>
-<title>Update Arsip &mdash; Sistem Persuratan Elektro</title>
+<title>Update Surat Masuk &mdash; Sistem Persuratan Elektro</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -12,7 +12,7 @@
             <a href="<?=site_url('inventory')?>" class="btn mr-2">
                 <i class="fas fa-arrow-left"></i>
             </a>
-            <h1>Arsip</h1>
+            <h1>Surat Masuk</h1>
         </div>
     </div><!-- /.container-fluid -->
 </div>
@@ -45,7 +45,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        Update Data Arsip
+                        Update Data Surat Masuk
                     </div>
                 </div>
                 <div class="card-body col-md-4">

@@ -32,7 +32,7 @@ class Register extends BaseController
         }
 
         $nama = $this->request->getVar('nama');
-        $niu = $this->request->getVar('niu');
+        $niu = $this->request->getVar('niu');   
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         $cpassword = $this->request->getVar('cpassword');

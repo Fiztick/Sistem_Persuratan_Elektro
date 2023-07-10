@@ -1,14 +1,14 @@
 <?= $this->extend('layout/default') ?>
 
 <?= $this->section('title') ?>
-<title>Data Arsip &mdash; Sistem Persuratan Elektro</title>
+<title>Data Surat Masuk &mdash; Sistem Persuratan Elektro</title>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid d-flex">
-        <h1>Arsip</h1>
+        <h1>Surat Masuk</h1>
         <a href="<?=site_url('inventory/add')?>" class="btn btn-primary ml-3">Add New</a>
     </div><!-- /.container-fluid -->
 </div>
@@ -41,7 +41,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">
-                        Data Arsip
+                        Data Surat Masuk
                     </div>
                 </div>
                 <div class="card-body">

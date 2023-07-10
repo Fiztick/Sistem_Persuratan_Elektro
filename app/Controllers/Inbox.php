@@ -20,13 +20,10 @@ class Inbox extends BaseController
 
     public function index()
     {
-        $query = "status_inbox < 3";
-
         $builder = $this->inbox_model->builder();
         $builder->join('users', 'users.id_user = inbox.id_user');
         $builder->join('tipe', 'tipe.id_tipe = inbox.tipe_inbox');
         $builder->join('status', 'status.id_status = inbox.status_inbox');
-        $builder->where($query);
         $builder->orderBy('tanggal_inbox', 'DESC');
         $datas = $builder->get()->getResult();
 

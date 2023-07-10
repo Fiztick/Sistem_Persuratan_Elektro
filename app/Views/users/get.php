@@ -88,6 +88,10 @@
                                             onclick="openModalDelete('<?=$value->id_user?>', 3)">
                                             <i class="fas fa-trash"></i>
                                         </button>
+                                        <button href="" class="btn btn-warning m-2" data-toggle="modal"
+                                            onclick="openModalResetPassword('<?=$value->id_user?>', '<?=$value->nomor_induk_user?>')">
+                                            <i class="fas fa-refresh" style="color:white"></i>
+                                        </button>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
@@ -164,6 +168,37 @@
                         </div>
                     </form>
                     <!-- end Modal Delete -->
+
+                    <!-- Modal Reset Password-->
+                    <form method="post" id="formReset">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="modal fade" id="reset-modal" tabindex="-1" role="dialog"
+                            aria-labelledby="reset-modalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="reset-modalLabel">Reset Password User
+                                        </h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <p>Apakah Anda Yakin?</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-warning" style="color:white">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- end Modal Reset Password -->
                 </div>
             </div>
 

@@ -21,19 +21,13 @@
         <li class="nav-item">
             <a href="<?= site_url('inbox') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Surat Masuk</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="<?= site_url('mailbox') ?>" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Surat Selesai</p>
+                <p>Pengajuan</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="<?= site_url('inventory') ?>" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Inventarisasi</p>
+                <p>Surat Masuk</p>
             </a>
         </li>
     </ul>

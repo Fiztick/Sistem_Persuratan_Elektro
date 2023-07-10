@@ -63,18 +63,18 @@
                         </div>
                         <div class="form-group">
                             <label>Deskripsi Surat</label>
-                            <textarea name="deskripsi_inbox" class="form-control" placeholder="Max 50 Kata" maxlength="50" autofocus required></textarea>
+                            <textarea name="deskripsi_inbox" class="form-control" placeholder="Masukkan Detail Pengajuan" maxlength="50" autofocus required></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Upload File</label>
+                            <label>Upload Dokumen Pendukung (Opsional)</label>
                             <div class="custom-file">
                             <input type="file" name="file_inbox" class="custom-file-input" id="file_inbox" accept=".doc, .docx, .pdf, .txt">
-                                <label class="custom-file-label" for="file_inbox">Choose file (optional)</label>
+                                <label class="custom-file-label" for="file_inbox">Choose file</label>
                             </div>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i>
-                                Kirim Permohonan</button>
+                                Kirim</button>
                             <button type="reset" class="btn btn-secondary">Reset</button>
                         </div>
                     </form>

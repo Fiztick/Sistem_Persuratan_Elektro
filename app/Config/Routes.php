@@ -55,6 +55,7 @@ $routes->get('user/add', 'User::create');
 $routes->post('user', 'User::store');
 $routes->get('user/edit/(:any)', 'User::edit/$1');
 $routes->put('user/updateStatus/(:any)', 'User::updateStatus/$1');
+$routes->put('user/resetPassword/(:any)/(:any)', 'User::resetPassword/$1/$2');
 $routes->put('user/(:any)', 'User::update/$1');
 $routes->delete('user/(:segment)', 'User::destroy/$1');
 

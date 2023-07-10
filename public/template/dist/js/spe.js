@@ -44,3 +44,14 @@ function openModalDelete(id, controller) {
 
     $('#formDelete').attr('action', url)
 }
+
+function openModalResetPassword(id, niu) {
+    $('#reset-modal').modal('show')
+
+    var controller = generateControllerURL(3)
+
+    var url = controller + 'resetPassword/' + id + '/' + niu
+
+    $('#formReset').attr('action', url)
+    // $('#niu').val(niu)
+}

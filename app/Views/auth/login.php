@@ -42,12 +42,11 @@
         <button type="submit" class="btn btn-primary btn-block">Sign In</button>
     </div>
 </form>
+<div class="mb-3">
+    <a href="<?=site_url('pencarian-surat')?>" class="btn btn-info btn-block">Progres Pengajuan Surat</a>
+</div>
 <p class="mb-0">
     Belum punya akun?
     <a href="<?=site_url('register')?>" class="text-center">Buat Akun</a>
-</p>
-<p class="mb-0">
-    Sudah punya kode surat?
-    <a href="<?=site_url('pencarian-surat')?>" class="text-center">Cari Kode Surat</a>
 </p>
 <?= $this->endSection() ?>

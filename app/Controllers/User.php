@@ -99,11 +99,21 @@ class User extends BaseController
                 'id_role' => $this->request->getVar('id_role'),
             ];
     
-            $this->user_model->where('id_user',$id)->set($data)->update();
+            $this->user_model->where('id_user', $id)->set($data)->update();
             return redirect()->to(site_url('user'))->with('success', 'Data Berhasil Diupdate');
         } else {
             return redirect()->to(site_url('user/edit/'.$id))->with('error', 'Password dan Confirm Password Tidak Sama');
         }
+    }
+
+    public function resetPassword($id, $niu)
+    {
+        // dd($id, $niu);
+        $data['password_user'] = password_hash($niu, PASSWORD_BCRYPT);
+
+        $this->user_model->where('id_user', $id)->set($data)->update();
+        
+        return redirect()->to(site_url('user'))->with('success', 'Password Berhasil Direset');
     }
 
     public function destroy($id) {
