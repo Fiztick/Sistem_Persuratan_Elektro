@@ -1,1 +1,1 @@
-# Sistem Persuratan untuk Teknik Elektro PNJ menggunakan Codeigniter 4
+# Sistem Persuratan menggunakan Codeigniter 4
